@@ -39,7 +39,7 @@ def main():
         elif option == 4:
             search_passengers()
         else:
-            print('Have a good day')
+            print('Have a good day,')
             break
 main()
 
