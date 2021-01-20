@@ -1,17 +1,9 @@
-{% load static %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Hello</title>
-    <link href="{% static 'hello/styles.css' %}" rel="stylesheet">
-</head>
-<body>
-<!--        {% if test %}-->
-<!--            <h1>Hello, World</h1>-->
-<!--        {% else %}-->
-<!--            <h1>Bye, World</h1>-->
-<!--        {% endif %}-->
-<h1>Hello</h1>
-</body>
-</html>
+{% extends "hello/layout.html" %}
+{% block body %}
+    <h1>Hello, This is the list of flights</h1>
+        <ul>List of flights</ul>
+        {% for flight in flights %}
+            <li>{{ flight }}</li>
+        {% endfor %}
+        <a href="{% url 'hello:add' %}">Add flight</a>
+{% endblock %}
