@@ -1,0 +1,69 @@
+{% load static %}
+<!DOCTYPE HTML>
+<!-- Website template by freewebsitetemplates.com -->
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Zerotype Website Template</title>
+	<link href="{% static 'temp/style.css' %}" rel="stylesheet">
+    <script src="{% static 'temp/main.js' %}"></script>
+
+</head>
+<body>
+	<div id="header">
+		<div>
+			<div class="logo">
+				<a href="index.html">Zero Type</a>
+			</div>
+			<ul id="navigation">
+				<li class="active">
+					<a href="{% url 'temp:index' %}">Home</a>
+				</li>
+				<li>
+					<a href="{% url 'temp:feature' %}">Products</a>
+				</li>
+				<li>
+					<a href="{% url 'temp:news' %}">News</a>
+				</li>
+				<li>
+					<a href="{% url 'temp:about' %}">About</a>
+				</li>
+				<li>
+					<a href="{% url 'temp:contact' %}">Contact</a>
+				</li>
+				<li>
+					<a href="{% url 'temp:register' %}">Register</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+{% block body %}
+{% endblock %}
+			<div>
+				<button class="open-button" onclick="openForm()">Login</button>
+				<div class="form-popup" id="myForm">
+				  <form action="/action_page.php" class="form-container">
+					<h1>Login</h1>
+					<label for="email"><b>Email</b></label>
+					<input type="text" placeholder="Enter Email" name="email" required>
+					<label for="psw"><b>Password</b></label>
+					<input type="password" placeholder="Enter Password" name="psw" required>
+					<button type="submit" class="btnlogin">Login</button>
+					<button type="button" class="cancellogin" onclick="closeForm()">Close</button>
+				  </form>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="footer">
+		<div class="clearfix">
+			<div id="connect">
+				<a href="http://freewebsitetemplates.com/go/facebook/" target="_blank" class="facebook"></a><a href="http://freewebsitetemplates.com/go/googleplus/" target="_blank" class="googleplus"></a><a href="http://freewebsitetemplates.com/go/twitter/" target="_blank" class="twitter"></a><a href="http://www.freewebsitetemplates.com/misc/contact/" target="_blank" class="tumbler"></a>
+			</div>
+			<p>
+				© 2023 Zerotype. All Rights Reserved.
+			</p>
+		</div>
+	</div>
+</body>
+</html>

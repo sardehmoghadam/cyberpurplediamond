@@ -10,7 +10,7 @@ class newflightform(forms.Form):
     price = forms.IntegerField(label="price")
 def index(request):
     return render(request, "hello/index.html", {
-        "flights": flights
+        "flights": Flight.objects.all()
     })
 def add(request):
     if request.method == "POST":
