@@ -4,7 +4,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>Zerotype Website Template</title>
+	<title>Purple Diamond</title>
 	<link href="{% static 'temp/style.css' %}" rel="stylesheet">
     <script src="{% static 'temp/main.js' %}"></script>
 
@@ -13,10 +13,10 @@
 	<div id="header">
 		<div>
 			<div class="logo">
-				<a href="index.html">Zero Type</a>
+				<a href="{% url 'temp:index' %}">Purple diamond</a>
 			</div>
 			<ul id="navigation">
-				<li class="active">
+				<li>
 					<a href="{% url 'temp:index' %}">Home</a>
 				</li>
 				<li>
@@ -39,20 +39,34 @@
 	</div>
 {% block body %}
 {% endblock %}
+			{% if flag %}
 			<div>
 				<button class="open-button" onclick="openForm()">Login</button>
 				<div class="form-popup" id="myForm">
-				  <form action="/action_page.php" class="form-container">
+				  <form action="{% url 'temp:logging' %}" class="form-container" method="POST">
+					{% csrf_token %}
 					<h1>Login</h1>
 					<label for="email"><b>Email</b></label>
-					<input type="text" placeholder="Enter Email" name="email" required>
+					<input type="text" placeholder="Enter Email" name="username" required>
 					<label for="psw"><b>Password</b></label>
-					<input type="password" placeholder="Enter Password" name="psw" required>
+					<input type="password" placeholder="Enter Password" name="password" required>
 					<button type="submit" class="btnlogin">Login</button>
 					<button type="button" class="cancellogin" onclick="closeForm()">Close</button>
 				  </form>
 				</div>
 			</div>
+			{% endif %}
+			{% if flag == False %}
+			<div>
+				<button class="open-button" onclick="openForm()">Logout</button>
+				<div class="form-popup" id="myForm">
+				  <form action="{% url 'temp:log_out' %}" class="form-container">
+					<button type="submit" class="btnlogin">Logout</button>
+					<button type="button" class="cancellogin" onclick="closeForm()">Close</button>
+				  </form>
+				</div>
+			</div>
+			{% endif %}
 		</div>
 	</div>
 	<div id="footer">
@@ -61,7 +75,7 @@
 				<a href="http://freewebsitetemplates.com/go/facebook/" target="_blank" class="facebook"></a><a href="http://freewebsitetemplates.com/go/googleplus/" target="_blank" class="googleplus"></a><a href="http://freewebsitetemplates.com/go/twitter/" target="_blank" class="twitter"></a><a href="http://www.freewebsitetemplates.com/misc/contact/" target="_blank" class="tumbler"></a>
 			</div>
 			<p>
-				© 2023 Zerotype. All Rights Reserved.
+				© 2023 Purple Diamond. All Rights Reserved.
 			</p>
 		</div>
 	</div>

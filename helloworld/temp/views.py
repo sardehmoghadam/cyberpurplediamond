@@ -1,40 +1,37 @@
 from django.contrib.auth import login, logout, authenticate
-from django.shortcuts import render, HttpResponseRedirect, reverse
-from django import forms
-from .models import contactmodel, users
-from .lib import hash
-from django.http import HttpResponse
+from .models import contactmodel
+from django.shortcuts import render, redirect
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 # Create your views here.
 
 def index(request):
     flag = False
     if not request.user.is_authenticated:
         flag = True
-    if request.method == "POST":
-        username = request.POST["username"]
-        password = request.POST["password"]
-        user = authenticate(request, username=username, password=password)
-        if user is not None:
-            login(request, user)
-            flag = True
-            return HttpResponseRedirect(reverse("temp:index"),{
-                "flag": flag
-            })
-        else:
-            return render(request, "temp/index.html", {
-                "message": "Invalid credentials."
-            })
+    # if request.method == "POST":
+    #     username = request.POST["username"]
+    #     password = request.POST["password"]
+    #     user = authenticate(request, username=username, password=password)
+    #     if user is not None:
+    #         login(request, user)
+    #         flag = True
+    #         return HttpResponseRedirect(reverse("temp:index"),{
+    #             "flag": flag
+    #         })
+    #     else:
+    #         return render(request, "temp/index.html", {
+    #             "message": "Invalid credentials."
+    #         })
 
     return render(request, "temp/index.html",{
         "flag": flag
     })
-class contactform(forms.Form):
-    name = forms.CharField(max_length=64, label="name")
-    email = forms.CharField(max_length=64, label="email")
-    subject = forms.CharField(max_length=64, label="subject")
-    desc = forms.CharField(max_length=1024, label="desc")
 
 def contact(request):
+    flag = False
+    if not request.user.is_authenticated:
+        flag = True
     if request.method == "POST":
         # form = contactform(request.POST)
         # if form.is_valid():
@@ -46,39 +43,53 @@ def contact(request):
             email = request.POST["email"]
             subject = request.POST["subject"]
             desc = request.POST["desc"]
-            f = contactmodel(name=name, email=email, subject=subject, desc=desc)
+            f = contactmodel(name=name, email=email, subject=subject, desc=desc, readed=False)
             f.save()
             return render(request, "temp/contact.html", {
-                # "form": contactform()
+                "flag": flag
             })
     else:
             # return render(request, "temp/contact.html",{
             #     "form": form
             # })
             return render(request, "temp/contact.html", {
-                # "form": contactform()
+                "flag": flag
     })
 def feature(request):
+    flag = False
+    if not request.user.is_authenticated:
+        flag = True
     return render(request, "temp/features.html", {
-
+        "flag": flag
     })
 
 def news(request):
+    flag = False
+    if not request.user.is_authenticated:
+        flag = True
     return render(request, "temp/news.html", {
-
+        "flag": flag
     })
-
 def about(request):
+    flag = False
+    if not request.user.is_authenticated:
+        flag = True
     return render(request, "temp/about.html", {
-
+        "flag": flag
     })
 
 def post(request):
+    flag = False
+    if not request.user.is_authenticated:
+        flag = True
     return render(request, "temp/post.html", {
-
+        "flag": flag
     })
 
 def register(request):
+    flag = False
+    if not request.user.is_authenticated:
+        flag = True
     if request.method == "POST":
         # form = contactform(request.POST)
         # if form.is_valid():
@@ -100,7 +111,26 @@ def register(request):
         #     "form": form
         # })
         return render(request, "temp/login.html", {
-
+            "flag": flag
     })
 
+def log_out(request):
+    logout(request)
+    return HttpResponseRedirect(reverse("temp:index"))
 
+def logging(request):
+    if request.method == "POST":
+        username = request.POST["username"]
+        password = request.POST["password"]
+        user = authenticate(request, username=username, password=password)
+        if user is not None:
+            login(request, user)
+            return HttpResponseRedirect(reverse("temp:index"), {
+                "message": "Valid credentials"
+            })
+        else:
+            return render(request, "temp/index.html", {
+                "message": "Invalid credentials."
+            })
+
+    return HttpResponseRedirect(reverse("temp:index"))
