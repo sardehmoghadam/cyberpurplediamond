@@ -23,7 +23,7 @@
 					<a href="{% url 'temp:feature' %}">Products</a>
 				</li>
 				<li>
-					<a href="{% url 'temp:news' %}">News</a>
+					<a href="{% url 'temp:news' %}">Resources</a>
 				</li>
 				<li>
 					<a href="{% url 'temp:about' %}">About</a>
@@ -46,8 +46,8 @@
 				  <form action="{% url 'temp:logging' %}" class="form-container" method="POST">
 					{% csrf_token %}
 					<h1>Login</h1>
-					<label for="email"><b>Email</b></label>
-					<input type="text" placeholder="Enter Email" name="username" required>
+					<label for="email"><b>Username</b></label>
+					<input type="text" placeholder="Enter username" name="username" required>
 					<label for="psw"><b>Password</b></label>
 					<input type="password" placeholder="Enter Password" name="password" required>
 					<button type="submit" class="btnlogin">Login</button>
@@ -58,7 +58,7 @@
 			{% endif %}
 			{% if flag == False %}
 			<div>
-				<button class="open-button" onclick="openForm()">Logout</button>
+				<button class="open-button" onclick="openForm()">Logout ({{ user.username }})</button>
 				<div class="form-popup" id="myForm">
 				  <form action="{% url 'temp:log_out' %}" class="form-container">
 					<button type="submit" class="btnlogin">Logout</button>
@@ -75,7 +75,7 @@
 				<a href="http://freewebsitetemplates.com/go/facebook/" target="_blank" class="facebook"></a><a href="http://freewebsitetemplates.com/go/googleplus/" target="_blank" class="googleplus"></a><a href="http://freewebsitetemplates.com/go/twitter/" target="_blank" class="twitter"></a><a href="http://www.freewebsitetemplates.com/misc/contact/" target="_blank" class="tumbler"></a>
 			</div>
 			<p>
-				© 2023 Purple Diamond. All Rights Reserved.
+				© 2021 Purple Diamond. All Rights Reserved.
 			</p>
 		</div>
 	</div>

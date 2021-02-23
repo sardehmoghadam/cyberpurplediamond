@@ -3,16 +3,16 @@
 {% block body %}
 	<div id="contents">
 		<div class="section">
-			<h1>Contact</h1>
+			<h1>Register</h1>
 			<p>
 				You can simply register in our website. Just fill out the following form and click on submit.
 			</p>
 			<form action="{% url 'temp:register' %}" method="POST" class="message">
 				{% csrf_token %}
-				<input type="text" placeholder="Name" name="name" onFocus="this.select();" onMouseOut="javascript:return false;"/>
-				<input type="text" placeholder="Email" name="email" onFocus="this.select();" onMouseOut="javascript:return false;"/>
-				<input type="password" placeholder="Enter Password" name="password" onFocus="this.select();" onMouseOut="javascript:return false;"/>
-				<input type="password" placeholder="Confirm Password"  name="confirmpassword" onFocus="this.select();" onMouseOut="javascript:return false;"/>
+				<input type="text" placeholder="Name" name="name" onFocus="this.select();" onMouseOut="javascript:return false;" required />
+				<input type="email" placeholder="Email" name="email" onFocus="this.select();" onMouseOut="javascript:return false;" required/>
+				<input type="password" placeholder="Enter Password" name="password" id="password" onFocus="this.select();" onMouseOut="javascript:return false;" onkeyup='passwordChanged();' required/>
+				<input type="password" placeholder="Confirm Password"  name="confirmpassword" id="confirmpassword" onFocus="this.select();" onMouseOut="javascript:return false;" onkeyup='check();' required/>
 				<input type="submit" value="Submit"/>
 			</form>
 		</div>

@@ -9,9 +9,9 @@
 			</p>
 			<form action="{% url 'temp:contact' %}" method="POST" class="message">
 				{% csrf_token %}
-				<input type="text" value="Name" name="name" onFocus="this.select();" onMouseOut="javascript:return false;"/>
-				<input type="text" value="Email" name="email" onFocus="this.select();" onMouseOut="javascript:return false;"/>
-				<input type="text" value="Subject" name="subject" onFocus="this.select();" onMouseOut="javascript:return false;"/>
+				<input type="text" placeholder="Name" name="name" onFocus="this.select();" onMouseOut="javascript:return false;" required/>
+				<input type="email" placeholder="Email Address" name="email" onFocus="this.select();" onMouseOut="javascript:return false;" required/>
+				<input type="text" placeholder="Subject" name="subject" onFocus="this.select();" onMouseOut="javascript:return false;" required/>
 				<textarea name="desc"></textarea>
 				<input type="submit" value="Send"/>
 			</form>

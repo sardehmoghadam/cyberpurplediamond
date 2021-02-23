@@ -2,28 +2,23 @@ from django.contrib.auth import login, logout, authenticate
 from .models import contactmodel
 from django.shortcuts import render, redirect
 from django.urls import reverse
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect, HttpResponse
+from django.contrib.auth.models import User
+from django_email_verification import send_email
+from django.core.mail import EmailMessage
+from .tokens import account_activation_token
+from django.template.loader import render_to_string
+from django.utils.encoding import force_bytes
+from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
+from django.contrib.sites.shortcuts import get_current_site
+from django.contrib.auth.tokens import default_token_generator
+from django.contrib.auth import get_user_model
 # Create your views here.
 
 def index(request):
     flag = False
     if not request.user.is_authenticated:
         flag = True
-    # if request.method == "POST":
-    #     username = request.POST["username"]
-    #     password = request.POST["password"]
-    #     user = authenticate(request, username=username, password=password)
-    #     if user is not None:
-    #         login(request, user)
-    #         flag = True
-    #         return HttpResponseRedirect(reverse("temp:index"),{
-    #             "flag": flag
-    #         })
-    #     else:
-    #         return render(request, "temp/index.html", {
-    #             "message": "Invalid credentials."
-    #         })
-
     return render(request, "temp/index.html",{
         "flag": flag
     })
@@ -59,7 +54,7 @@ def feature(request):
     flag = False
     if not request.user.is_authenticated:
         flag = True
-    return render(request, "temp/features.html", {
+    return render(request, "temp/mail_body.html", {
         "flag": flag
     })
 
@@ -91,27 +86,40 @@ def register(request):
     if not request.user.is_authenticated:
         flag = True
     if request.method == "POST":
-        # form = contactform(request.POST)
-        # if form.is_valid():
-        # name = form.cleaned_data["name"]
-        # email = form.cleaned_data["email"]
-        # subject = form.cleaned_data["subject"]
-        # desc = form.cleaned_data["desc"]
         name = request.POST["name"]
-        email = request.POST["email"]
+        useremail = request.POST["email"]
         password = request.POST["password"]
-        store = hash(password)
-        f = users(name=name, email=email, key=store[0], salt=store[1])
-        f.save()
-        return render(request, "temp/login.html", {
-            # "form": contactform()
-        })
+        confirmpassword = request.POST["confirmpassword"]
+        if password == confirmpassword:
+            user = User.objects.create_user(name, useremail, password)
+            user.is_active = False  # Example
+            user.save()
+            current_site = get_current_site(request)
+            mail_subject = 'Activate your account.'
+            message = render_to_string('temp/acc_active_email.html', {
+                'user': user,
+                'domain': current_site.domain,
+                'uid': urlsafe_base64_encode(force_bytes(user.pk)),
+                'token': default_token_generator.make_token(user),
+            })
+            email = EmailMessage(
+                mail_subject, message, to=[useremail]
+            )
+            email.send()
+
+            return HttpResponse('Please confirm your email address to complete the registration')
+        else:
+            message = "Password does not match"
+            return render(request, "temp/login.html", {
+                "message": message
+            })
+
     else:
         # return render(request, "temp/contact.html",{
         #     "form": form
         # })
         return render(request, "temp/login.html", {
-            "flag": flag
+            "flag": flag,
     })
 
 def log_out(request):
@@ -134,3 +142,16 @@ def logging(request):
             })
 
     return HttpResponseRedirect(reverse("temp:index"))
+
+def activate(request, uidb64, token):
+    try:
+        uid = urlsafe_base64_decode(uidb64).decode()
+        user = User._default_manager.get(pk=uid)
+    except(TypeError, ValueError, OverflowError, User.DoesNotExist):
+        user = None
+    if user is not None and default_token_generator.check_token(user, token):
+        user.is_active = True
+        user.save()
+        return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
+    else:
+        return HttpResponse('Activation link is invalid!')
