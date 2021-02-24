@@ -12,4 +12,5 @@ urlpatterns = [
     path("logging", views.logging, name="logging"),
     path("log_out", views.log_out, name="log_out"),
     path('activate/<uidb64>/<token>/', views.activate, name="activate"),
+    path("<int:pk>/", views.post_detail, name="post_detail"),
 ]

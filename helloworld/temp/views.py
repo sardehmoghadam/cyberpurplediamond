@@ -1,5 +1,5 @@
 from django.contrib.auth import login, logout, authenticate
-from .models import contactmodel
+from .models import contactmodel, blog
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
@@ -62,23 +62,32 @@ def news(request):
     flag = False
     if not request.user.is_authenticated:
         flag = True
+    posts = blog.objects.all()
     return render(request, "temp/news.html", {
-        "flag": flag
+        "flag": flag,
+        "posts": posts
     })
 def about(request):
     flag = False
     if not request.user.is_authenticated:
         flag = True
+    posts = blog.objects.all()
     return render(request, "temp/about.html", {
         "flag": flag
     })
 
-def post(request):
+def post(request, pk):
     flag = False
     if not request.user.is_authenticated:
         flag = True
+    content = blog.objects.get(pk=pk)
+    content.totalread = content.totalread + 1
+    context = {
+        'content': content
+    }
     return render(request, "temp/post.html", {
-        "flag": flag
+        "flag": flag,
+        "content": content
     })
 
 def register(request):
@@ -155,3 +164,11 @@ def activate(request, uidb64, token):
         return HttpResponse('Thank you for your email confirmation. Now you can login your account.')
     else:
         return HttpResponse('Activation link is invalid!')
+
+def post_detail(request, pk):
+    content = blog.objects.get(pk=pk)
+    content.totalread = content.totalread + 1
+    context = {
+        'content': content
+    }
+    return render(request, 'temp/post.html', context)

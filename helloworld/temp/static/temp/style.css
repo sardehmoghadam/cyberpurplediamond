@@ -320,6 +320,11 @@ p a {
 #about h1, .section h1 {
 	border-bottom: 1px solid #e0e0e0;
 	padding-bottom: 12px;
+	text-align: center;
+}
+.section p {
+	padding-bottom: 12px;
+	text-align: center;
 }
 .section {
 	float: left;
@@ -372,7 +377,7 @@ p a {
 #footer {
 	background-color: #c20097;
 	border-top: 1px solid #d8d8d8;
-	padding: 30px 0;
+	padding: 10px 0;
 }
 #footer p {
 	font-size: 12px;
