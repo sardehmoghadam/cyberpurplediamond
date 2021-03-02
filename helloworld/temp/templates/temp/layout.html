@@ -5,7 +5,13 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Purple Diamond</title>
-	<link href="{% static 'temp/style.css' %}" rel="stylesheet">
+			{% if flag %}
+			<link href="{% static 'temp/style.css' %}" rel="stylesheet">
+			{% endif %}
+			{% if flag == False %}
+			<link href="{% static 'temp/loginstyle.css' %}" rel="stylesheet">
+			{% endif %}
+
     <script src="{% static 'temp/main.js' %}"></script>
 
 </head>
@@ -19,9 +25,12 @@
 				<li>
 					<a href="{% url 'temp:index' %}">Home</a>
 				</li>
-<!--				<li>
-					<a href="{% url 'temp:feature' %}">Products</a>
-				</li>-->
+				<li>
+					<a href="{% url 'temp:feature' %}">Threat Simulation</a>
+				</li>
+				<li>
+					<a href="{% url 'temp:mitrematrix' %}">MITRE Matrix</a>
+				</li>
 				<li>
 					<a href="{% url 'temp:news' %}">Resources</a>
 				</li>

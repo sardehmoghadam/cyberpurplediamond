@@ -1,0 +1,9 @@
+{% extends "temp/layout.html" %}
+{% block body %}
+    <h1>Hello, This is the list of TTPs</h1>
+        <ul>List of TTPs</ul>
+        {% for flight in flights %}
+            <li>{{ flight }}</li>
+        {% endfor %}
+        <a href="{% url 'temp:add' %}">Add flight</a>
+{% endblock %}

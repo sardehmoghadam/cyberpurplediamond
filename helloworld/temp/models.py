@@ -1,4 +1,7 @@
 from django.db import models
+from pyattck import Attck
+
+attack = Attck()
 from django.contrib.auth.models import AbstractUser, User
 from django.contrib.auth.models import PermissionsMixin
 
