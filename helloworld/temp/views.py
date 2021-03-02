@@ -54,7 +54,15 @@ def feature(request):
     flag = False
     if not request.user.is_authenticated:
         flag = True
-    return render(request, "temp/mail_body.html", {
+    return render(request, "temp/features.html", {
+        "flag": flag
+    })
+
+def mitrematrix(request):
+    flag = False
+    if not request.user.is_authenticated:
+        flag = True
+    return render(request, "temp/mitrematrix.html",{
         "flag": flag
     })
 

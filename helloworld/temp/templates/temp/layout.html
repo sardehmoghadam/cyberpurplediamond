@@ -5,8 +5,32 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Purple Diamond</title>
-	<link href="{% static 'temp/style.css' %}" rel="stylesheet">
-    <script src="{% static 'temp/main.js' %}"></script>
+<!--			{% if flag %}-->
+<!--			<link href="{% static 'temp/style.css' %}" rel="stylesheet">-->
+<!--			{% endif %}-->
+<!--			{% if flag == False %}-->
+<!--			<link href="{% static 'temp/loginstyle.css' %}" rel="stylesheet">-->
+<!--			{% endif %}-->
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <script type="text/javascript" async="" src="{% static 'temp/matrix/analytics.js"></script><script async="" src="Matrix%20-%20Enterprise%20|%20MITRE%20ATT&amp;CK%C2%AE_files/js.js"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'UA-62667723-1');
+    </script>
+    <meta name="google-site-verification" content="2oJKLqNN62z6AOCb0A0IXGtbQuj-lev5YPAHFF_cbHQ">
+
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <link rel="shortcut icon" href="https://attack.mitre.org/theme/favicon.ico" type="image/x-icon">
+        <!-- Bootstrap CSS -->
+        <link rel="stylesheet" href="{% static 'temp/matrix/bootstrap.css' %}">
+        <link rel="stylesheet" href="{% static 'temp/matrix/bootstrap-glyphicon.css' %}">
+        <link rel="stylesheet" href="{% static 'temp/matrix/bootstrap-tourist.css' %}">
+        <link rel="stylesheet" type="text/css" href="{% static 'temp/matrix/style.css' %}">
+	    <script src="{% static 'temp/main.js' %}"></script>
 
 </head>
 <body>
@@ -19,9 +43,12 @@
 				<li>
 					<a href="{% url 'temp:index' %}">Home</a>
 				</li>
-<!--				<li>
-					<a href="{% url 'temp:feature' %}">Products</a>
-				</li>-->
+				<li>
+					<a href="{% url 'temp:feature' %}">Threat Simulation</a>
+				</li>
+				<li>
+					<a href="{% url 'temp:mitrematrix' %}">MITRE Matrix</a>
+				</li>
 				<li>
 					<a href="{% url 'temp:news' %}">Resources</a>
 				</li>
