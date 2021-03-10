@@ -12,6 +12,7 @@ from django.utils.encoding import force_bytes
 from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.tokens import default_token_generator
+from pyattck import Attck
 from django.contrib.auth import get_user_model
 # Create your views here.
 
@@ -54,15 +55,21 @@ def feature(request):
     flag = False
     if not request.user.is_authenticated:
         flag = True
+    attack = Attck()
+
+    for technique in attack.enterprise.techniques:
+        print(technique.id)
+        print(technique.name)
     return render(request, "temp/features.html", {
-        "flag": flag
+        "flag": flag,
+        'attack': attack
     })
 
 def mitrematrix(request):
     flag = False
     if not request.user.is_authenticated:
         flag = True
-    return render(request, "temp/mitrematrix.html",{
+    return render(request, "temp/compass.html",{
         "flag": flag
     })
 

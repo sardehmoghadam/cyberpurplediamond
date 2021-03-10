@@ -12,6 +12,64 @@
 			{% endif %}
 			{% if flag == False %}
 			<link href="{% static 'temp/loginstyle.css' %}" rel="stylesheet">
+			<button id="defaultOpen" class="tablink" onclick="openPage('tactics', this, 'red')">Accessing tactics</button>
+			<button class="tablink" onclick="openPage('techniques', this, 'green')">Accessing Techniques</button>
+			<button class="tablink" onclick="openPage('mitigations', this, 'blue')">Accessing Mitigations</button>
+			<button class="tablink" onclick="openPage('actors', this, 'orange')">Actors with malwares</button>
+			<script>
+				document.getElementById("defaultOpen").click();
+			</script>
+			<div id="tactics" class="tabcontent">
+			{% for tactic in attack.enterprise.tactics %}
+					<ul>
+						<li>{{ tactic.id }} {{tactic.name }}</li>
+					</ul>
+			{% endfor %}
+			</div>
+
+			<div id="techniques" class="tabcontent">
+				{% for tactic in attack.enterprise.tactics %}
+			<ul>
+				<li>{{ tactic.id }} {{tactic.name }}</li>
+				<ul>
+				{% for technique in tactic.techniques %}
+					<li>{{ technique.id }} {{ technique.name }} Alias {{ technique.alias }}</li>
+					<ul>
+						<li> STIX: {{ technique.stix}}</li>
+						<li> Platforms: {{ technique.platforms}}</li>
+						<li> Permissions: {{ technique.permissions}}</li>
+<!--					<li>{{ technique.description }}</li>-->
+						<li><a href="{{ technique.wiki }}">{{ technique.wiki }}</a></li>
+					</ul>
+
+					{% for subtechnique in maintechnique.subtechniques %}
+					<ul>
+						<li>{{subtechnique.id}} {{subtechnique.name}}</li>
+					</ul>
+					{% endfor %}
+				{% endfor %}
+				</ul>
+			</ul>
+			{% endfor %}
+			</div>
+
+			<div id="mitigations" class="tabcontent">
+
+			</div>
+
+			<div id="actors" class="tabcontent">
+			{% for actor in attack.enterprise.actors %}
+			<ul>
+				<li>{{ actor.id }} {{actor.name }}</li>
+				<ul>
+				{% for malware in actor.malwares %}
+					<li>{{ malware.id }} {{ malware.name }}</li>
+				{% endfor %}
+				</ul>
+			</ul>
+			{% endfor %}
+			</div>
+
 			{% endif %}
 			</div>
 		</div>
