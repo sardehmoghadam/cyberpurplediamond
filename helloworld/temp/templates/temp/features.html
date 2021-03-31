@@ -12,66 +12,298 @@
 			{% endif %}
 			{% if flag == False %}
 			<link href="{% static 'temp/loginstyle.css' %}" rel="stylesheet">
-			<button id="defaultOpen" class="tablink" onclick="openPage('tactics', this, 'red')">Accessing tactics</button>
-			<button class="tablink" onclick="openPage('techniques', this, 'green')">Accessing Techniques</button>
-			<button class="tablink" onclick="openPage('mitigations', this, 'blue')">Accessing Mitigations</button>
-			<button class="tablink" onclick="openPage('actors', this, 'orange')">Actors with malwares</button>
-			<script>
-				document.getElementById("defaultOpen").click();
-			</script>
+<!--			<div class="navbar">-->
+<!--			  <div class="dropdown">-->
+<!--				<button class="dropbtn">Tactics-->
+<!--				  <i class="fa fa-caret-down"></i>-->
+<!--				</button>-->
+<!--				<div class="dropdown-content">-->
+<!--				  <a id="defaultOpen" class="tablink" onclick="openPage('tactics', this, 'purple')">Just tactics</a>-->
+<!--				  <a  class="tablink" onclick="openPage('techniques', this, 'purple')">Tactics with techniques</a>-->
+
+<!--				</div>-->
+<!--			  </div>-->
+<!--				<div class="dropdown">-->
+<!--				<button class="dropbtn">Techniques-->
+<!--				  <i class="fa fa-caret-down"></i>-->
+<!--				</button>-->
+<!--				<div class="dropdown-content">-->
+<!--				  <a href="#">Link 1</a>-->
+<!--				  <a href="#">Link 2</a>-->
+<!--				  <a href="#">Link 3</a>-->
+<!--				</div>-->
+<!--				</div>-->
+<!--				<div class="dropdown">-->
+<!--				<button class="dropbtn">Tools-->
+<!--				  <i class="fa fa-caret-down"></i>-->
+<!--				</button>-->
+<!--				<div class="dropdown-content">-->
+<!--				  <a href="#">Link 1</a>-->
+<!--				  <a href="#">Link 2</a>-->
+<!--				  <a href="#">Link 3</a>-->
+<!--				</div>-->
+<!--			  </div>-->
+<!--			</div>-->
+			<button id="defaultOpen" class="tablink" onclick="openPage('tactics', this, 'purple')">Tactics</button>
+			<button class="tablink" onclick="openPage('techniques', this, 'purple')">Techniques</button>
+			<button class="tablink" onclick="openPage('malwares', this, 'purple')">Malwares</button>
+			<button class="tablink" onclick="openPage('actors', this, 'purple')">Actors</button>
+			<button class="tablink" onclick="openPage('tools', this, 'purple')">Tools</button>
+			<button class="tablink" onclick="openPage('mitigations', this, 'purple')">Mitigations</button>
+			<button class="expand" onclick="expand()"></button>
 			<div id="tactics" class="tabcontent">
-			{% for tactic in attack.enterprise.tactics %}
-					<ul>
-						<li>{{ tactic.id }} {{tactic.name }}</li>
-					</ul>
-			{% endfor %}
+				{% for tactic in attack.enterprise.tactics %}
+				 <button type="button" class="collapsible">{{ tactic.id }} {{tactic.name }}</button>
+					<div class="mycascade">
+						{% for technique in tactic.techniques %}
+						<button type="button" class="collapsible">{{ technique.id}} {{ technique.name}}</button>
+							<div class="mycascade">
+								<button type="button" class="collapsible">Platforms</button>
+									<div class="mycascade">
+										<ul>
+											{% for item in technique.platforms %}
+											<li>{{ item }}</li>
+											{% endfor %}
+										</ul>
+									</div>
+								<button type="button" class="collapsible">Permissions</button>
+									<div class="mycascade">
+										<ul>
+											{% for item in technique.permissions %}
+											<li>{{ item }}</li>
+											{% endfor %}
+										</ul>
+									</div>
+								<button type="button" class="collapsible">Command list</button>
+									<div class="mycascade">
+										<ul>
+											{% for item in technique.command_list %}
+											<li>{{ item }}</li>
+											{% endfor %}
+										</ul>
+									</div>
+								<button type="button" class="collapsible">Commands</button>
+									<div class="mycascade">
+										<ul>
+											{% for item in technique.commands %}
+											<li>{{ item }}</li>
+											{% endfor %}
+										</ul>
+									</div>
+								<button type="button" class="collapsible">Queries</button>
+									<div class="mycascade">
+										<ul>
+											{% for item in technique.queries %}
+											<li>{{ item }}</li>
+											{% endfor %}
+										</ul>
+									</div>
+								<button type="button" class="collapsible">Datasets</button>
+									<div class="mycascade">
+										<ul>
+											{% for item in technique.queries %}
+											<li>{{ item }}</li>
+											{% endfor %}
+										</ul>
+									</div>
+								<button type="button" class="collapsible">Possible detections</button>
+									<div class="mycascade">
+										<ul>
+											{% for item in technique.possible_detections %}
+											<li>{{ item }}</li>
+											{% endfor %}
+										</ul>
+									</div>
+								<button type="button" class="collapsible">Reference</button>
+									<div class="mycascade">
+										<ul>
+											<li><a href="{{ technique.wiki }}" target="_blank">{{ technique.wiki}}</a></li>
+										</ul>
+									</div>
+							</div>
+						{% endfor %}
+						</ul>
+					</div>
+				{% endfor %}
+
 			</div>
 
 			<div id="techniques" class="tabcontent">
-				{% for tactic in attack.enterprise.tactics %}
-			<ul>
-				<li>{{ tactic.id }} {{tactic.name }}</li>
-				<ul>
-				{% for technique in tactic.techniques %}
-					<li>{{ technique.id }} {{ technique.name }} Alias {{ technique.alias }}</li>
-					<ul>
-						<li> STIX: {{ technique.stix}}</li>
-						<li> Platforms: {{ technique.platforms}}</li>
-						<li> Permissions: {{ technique.permissions}}</li>
-<!--					<li>{{ technique.description }}</li>-->
-						<li><a href="{{ technique.wiki }}">{{ technique.wiki }}</a></li>
-					</ul>
-
-					{% for subtechnique in maintechnique.subtechniques %}
-					<ul>
-						<li>{{subtechnique.id}} {{subtechnique.name}}</li>
-					</ul>
-					{% endfor %}
+				{% for technique in attack.enterprise.techniques %}
+				 <button type="button" class="collapsible">{{ technique.id }} {{technique.name }}</button>
+					<div class="mycascade">
+						<button type="button" class="collapsible">Tactics</button>
+							<div class="mycascade">
+								<ul>
+								{% for tactic in technique.tactics %}
+									<li>{{ tactic.id }} {{ tactic.name }}</li>
+								{% endfor %}
+								</ul>
+							</div>
+						<button type="button" class="collapsible">Actors</button>
+							<div class="mycascade">
+								<ul>
+								{% for actor in technique.actors %}
+									<li>{{ actor.id }} {{ actor.name }}</li>
+								{% endfor %}
+								</ul>
+							</div>
+						<button type="button" class="collapsible">Subtechniques</button>
+							<div class="mycascade">
+								<ul>
+							{% for subtechnique in technique.subtechniques %}
+							<ul>
+								<li>{{subtechnique.id}} {{subtechnique.name}}</li>
+							</ul>
+							{% endfor %}
+							</div>
+					</div>
 				{% endfor %}
-				</ul>
-			</ul>
-			{% endfor %}
+
 			</div>
 
-			<div id="mitigations" class="tabcontent">
-
+			<div id="malwares" class="tabcontent">
+				{% for malware in attack.enterprise.malwares %}
+				 <button type="button" class="collapsible">{{ malware.id }} {{malware.name }}</button>
+					<div class="mycascade">
+						<button type="button" class="collapsible">Actors</button>
+							<div class="mycascade">
+								<ul>
+								{% for actor in malware.actors %}
+									<li>{{ actor.id }} {{ actor.name }}</li>
+								{% endfor %}
+								</ul>
+							</div>
+						<button type="button" class="collapsible">Techniques</button>
+							<div class="mycascade">
+								<ul>
+								{% for technique in malware.techniques %}
+									<li>{{ technique.id }} {{ technique.name }}</li>
+								{% endfor %}
+								</ul>
+							</div>
+					</div>
+				{% endfor %}
 			</div>
 
 			<div id="actors" class="tabcontent">
-			{% for actor in attack.enterprise.actors %}
-			<ul>
-				<li>{{ actor.id }} {{actor.name }}</li>
-				<ul>
-				{% for malware in actor.malwares %}
-					<li>{{ malware.id }} {{ malware.name }}</li>
+				{% for actor in attack.enterprise.actors %}
+				 <button type="button" class="collapsible">{{ actor.id }} {{actor.name }}</button>
+					<div class="mycascade">
+						<button type="button" class="collapsible">Malwares</button>
+							<div class="mycascade">
+								<ul>
+								{% for malware in actor.malwares %}
+									<li>{{ malware.id }} {{ malware.name }}</li>
+								{% endfor %}
+								</ul>
+							</div>
+						<button type="button" class="collapsible">Tools</button>
+							<div class="mycascade">
+								<ul>
+								{% for tool in actor.tools %}
+									<li>{{ tool.id }} {{ tool.name }}</li>
+								{% endfor %}
+								</ul>
+							</div>
+						<button type="button" class="collapsible">Techniques</button>
+							<div class="mycascade">
+								<ul>
+							{% for technique in actor.techniques %}
+							<ul>
+								<li>{{technique.id}} {{technique.name}}</li>
+							</ul>
+							{% endfor %}
+							</div>
+					</div>
 				{% endfor %}
-				</ul>
-			</ul>
-			{% endfor %}
+
+			</div>
+
+			<div id="tools" class="tabcontent">
+				{% for tool in attack.enterprise.tools %}
+				 <button type="button" class="collapsible">{{ tool.id }} {{tool.name }}</button>
+					<div class="mycascade">
+						<button type="button" class="collapsible">Techniques</button>
+							<div class="mycascade">
+								<ul>
+								{% for technique in tool.techniques %}
+									<li>{{ technique.id }} {{ technique.name }}</li>
+								{% endfor %}
+								</ul>
+							</div>
+						<button type="button" class="collapsible">Actors</button>
+							<div class="mycascade">
+								<ul>
+								{% for actor in tool.actors %}
+									<li>{{ actor.id }} {{ actor.name }}</li>
+								{% endfor %}
+								</ul>
+							</div>
+					</div>
+				{% endfor %}
+
+			</div>
+
+			<div id="mitigations" class="tabcontent">
+				{% for mitigation in attack.enterprise.mitigations %}
+				 <button type="button" class="collapsible">{{ mitigation.id }} {{mitigation.name }}</button>
+					<div class="mycascade">
+						<button type="button" class="collapsible">Techniques</button>
+							<div class="mycascade">
+								<ul>
+								{% for technique in tool.techniques %}
+									<li>{{ technique.id }} {{ technique.name }}</li>
+								{% endfor %}
+								</ul>
+							</div>
+						<button type="button" class="collapsible">Actors</button>
+							<div class="mycascade">
+								<ul>
+								{% for actor in tool.actors %}
+									<li>{{ actor.id }} {{ actor.name }}</li>
+								{% endfor %}
+								</ul>
+							</div>
+					</div>
+				{% endfor %}
+
 			</div>
 
 			{% endif %}
 			</div>
 		</div>
 	</div>
+			<script>
+				document.getElementById("defaultOpen").click();
+				var coll = document.getElementsByClassName("collapsible");
+				var i;
+
+				for (i = 0; i < coll.length; i++) {
+				  coll[i].addEventListener("click", function() {
+					this.classList.toggle("active");
+					var content = this.nextElementSibling;
+					if (content.style.display === "block") {
+					  content.style.display = "none";
+					} else {
+					  content.style.display = "block";
+					}
+				  });
+				}
+				function expand() {
+				var coll = document.getElementsByClassName("collapsible");
+				var i;
+
+				for (i = 0; i < coll.length; i++) {
+				  	coll[i].classList.toggle("active");
+					var content = coll[i].nextElementSibling;
+					if (content.style.display === "block") {
+					  content.style.display = "none";
+					} else {
+					  content.style.display = "block";
+					}
+				  ;
+				}
+				}
+			</script>
 {% endblock %}

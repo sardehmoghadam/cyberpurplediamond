@@ -36,7 +36,7 @@ var passwordChanged = function() {
         }
     }
 
-function openPage(pageName, elmnt, color) {
+var openPage = function(pageName, elmnt, color) {
   // Hide all elements with class="tabcontent" by default */
   var i, tabcontent, tablinks;
   tabcontent = document.getElementsByClassName("tabcontent");
@@ -55,7 +55,8 @@ function openPage(pageName, elmnt, color) {
 
   // Add the specific color to the button used to open the tab content
   elmnt.style.backgroundColor = color;
-}
 
-// Get the element with id="defaultOpen" and click on it
-document.getElementById("defaultOpen").click();
+
+}
+  document.getElementById("defaultOpen").click();
+
