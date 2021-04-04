@@ -5,13 +5,13 @@
 		<div class="features">
 			<h1>Threat Simulation</h1>
 			{% if flag %}
-			<link href="{% static 'temp/style.css' %}" rel="stylesheet">
+<!--			<link href="{% static 'temp/style.css' %}" rel="stylesheet">-->
 			<p>
 				You have to login to use this feature. Please login or register via corner box of the site.
 			</p>
 			{% endif %}
 			{% if flag == False %}
-			<link href="{% static 'temp/loginstyle.css' %}" rel="stylesheet">
+<!--			<link href="{% static 'temp/loginstyle.css' %}" rel="stylesheet">-->
 <!--			<div class="navbar">-->
 <!--			  <div class="dropdown">-->
 <!--				<button class="dropbtn">Tactics-->
@@ -112,6 +112,12 @@
 											{% for item in technique.possible_detections %}
 											<li>{{ item }}</li>
 											{% endfor %}
+										</ul>
+									</div>
+								<button type="button" class="collapsible">Description</button>
+									<div class="mycascade">
+										<ul>
+											<li>{{ technique.description}}</li>
 										</ul>
 									</div>
 								<button type="button" class="collapsible">Reference</button>

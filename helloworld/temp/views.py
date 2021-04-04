@@ -100,7 +100,7 @@ def post(request, pk):
     context = {
         'content': content
     }
-    return render(request, "temp/post.html", {
+    return render(request, "temp/{{ pk }}.html", {
         "flag": flag,
         "content": content
     })
@@ -181,9 +181,11 @@ def activate(request, uidb64, token):
         return HttpResponse('Activation link is invalid!')
 
 def post_detail(request, pk):
+    flag = False
+    if not request.user.is_authenticated:
+        flag = True
     content = blog.objects.get(pk=pk)
     content.totalread = content.totalread + 1
-    context = {
-        'content': content
-    }
-    return render(request, 'temp/post.html', context)
+    return render(request, f"temp/posts/{pk}.html" , {
+        "flag": flag
+    })
