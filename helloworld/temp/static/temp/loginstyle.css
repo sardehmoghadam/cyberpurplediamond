@@ -29,7 +29,7 @@ img {
     -moz-background-size: cover;
     -o-background-size: cover;
     background-size: cover;
-    border-radius: 50%;
+
 	border: 0;
 }
 .clearfix:after, #contents:after {
@@ -273,8 +273,10 @@ p a {
 }
 .news li {
 	border-top: 1px solid #d5d5d5;
-	padding: 24px 30px 0 100px;
+	padding: 24px 30px 0 10px;
 	position: relative;
+	text-align: justify;
+	text-justify: inter-word;
 }
 .news li .date {
 	float: none;
@@ -285,6 +287,7 @@ p a {
 .news li > p span, .post > span {
 	display: block;
 	text-align: right;
+
 }
 .posts {
 	border-top: 1px solid #d5d5d5;
@@ -334,15 +337,21 @@ p a {
 .section h1 {
 	margin-bottom: 18px;
 }
-.message input[type='text'], .message textarea, .message input[type='email'] {
+
+.message {
+    text-align: center;
+}
+
+.message input[type='text'], .message textarea, .message input[type='email'], .message input[type='password'] {
 	color: #aeaeae;
 	font-size: 13px;
 	height: 33px;
 	line-height: 33px;
-	width: 980px;
+	width: 900px;
 	border: 1px solid #d5d5d5;
 	margin: 0 0 6px;
 	padding: 0 4px;
+
 }
 .message textarea {
 	height: 175px;
@@ -357,7 +366,7 @@ p a {
 	font: 13px/30px Arial, Helvetica, sans-serif;
 	height: 30px;
 	border: 0;
-	margin: 0;
+    margin-right: 35px;
 	padding: 0 20px;
 }
 .contact {
@@ -402,6 +411,7 @@ p a {
 }
 #connect a.googleplus {
 	background-position: 0 -40px;
+    bottom: 10px;
 }
 #connect a.twitter {
 	background-position: 0 -80px;
@@ -639,3 +649,26 @@ p a {
 .active:after {
   content: "\2796"; /* Unicode character for "minus" sign (-) */
 }
+
+ /* Pagination links */
+ .pagination {
+    text-align: center;
+
+ }
+
+.pagination a {
+  color: black;
+
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+}
+
+/* Style the active/current link */
+.pagination a.pageactive {
+  background-color: purple;
+  color: white;
+}
+
+/* Add a grey background color on mouse-over */
+.pagination a:hover:not(.pageactive) {background-color: #ddd;}

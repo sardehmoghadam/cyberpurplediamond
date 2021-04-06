@@ -13,6 +13,9 @@ from django.utils.http import urlsafe_base64_encode, urlsafe_base64_decode
 from django.contrib.sites.shortcuts import get_current_site
 from django.contrib.auth.tokens import default_token_generator
 from pyattck import Attck
+from django.template import loader
+from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
+from django.http import JsonResponse
 from django.contrib.auth import get_user_model
 # Create your views here.
 
@@ -77,11 +80,26 @@ def news(request):
     flag = False
     if not request.user.is_authenticated:
         flag = True
-    posts = blog.objects.all()
-    return render(request, "temp/news.html", {
-        "flag": flag,
-        "posts": posts
+    page = 1
+    page = request.GET.get('page')
+    allposts = blog.objects.all()
+    # use Django's pagination
+    # https://docs.djangoproject.com/en/dev/topics/pagination/
+    results_per_page = 5
+    paginator = Paginator(allposts, results_per_page)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+    # build a html posts list with the paginated posts
+    return render(request, 'temp/news.html', {
+        'posts': posts,
+        'flag': flag,
+        'page': page
     })
+
 def about(request):
     flag = False
     if not request.user.is_authenticated:
@@ -189,3 +207,35 @@ def post_detail(request, pk):
     return render(request, f"temp/posts/{pk}.html" , {
         "flag": flag
     })
+
+def lazy_load_posts(request):
+    flag = False
+    if not request.user.is_authenticated:
+        flag = True
+    page = request.POST.get('page')
+    posts = blog.objects.all()
+    # use Django's pagination
+    # https://docs.djangoproject.com/en/dev/topics/pagination/
+    results_per_page = 2
+    paginator = Paginator(posts, results_per_page)
+    try:
+        posts = paginator.page(page)
+    except PageNotAnInteger:
+        posts = paginator.page(1)
+    except EmptyPage:
+        posts = paginator.page(paginator.num_pages)
+    # build a html posts list with the paginated posts
+    posts_html = loader.render_to_string(
+        'temp/post.html',
+
+        {'posts': posts,
+         'flag': flag
+         }
+    )
+    # package output data and return it as a JSON object
+    output_data = {
+        'posts_html': posts_html,
+        'flag': flag,
+        'has_next': posts.has_next()
+    }
+    return JsonResponse(output_data)
