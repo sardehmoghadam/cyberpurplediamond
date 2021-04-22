@@ -16,7 +16,7 @@
 <!--					</div>-->
 					<h2>{{ post.topic}}<span>{{ post.reference }}</span></h2>
 					<p>
-						{{ post.content }} <span><a href="{% url 'temp:post_detail' post.pk%}" class="more">Read More</a></span>
+						{{ post.content | slice:":255"}} <span><a href="{% url 'temp:post_detail' post.pk%}" class="more">Read More</a></span>
 					</p>
 				</li>
 				{% endfor %}
@@ -46,18 +46,6 @@
 					{% endif %}
 				</span>
 			</div>
-
-<!--			    <script type="text/javascript">-->
-<!--				  // A CSRF token is required when making post requests in Django-->
-<!--				  // To be used for making AJAX requests in script.js-->
-<!--				  window.CSRF_TOKEN = "{{ csrf_token }}";-->
-<!--				</script>-->
-<!--			<div id="posts">{% include 'temp/post.html' %}</div>-->
-<!--			<div>-->
-<!--			  <a id="lazyLoadLink"-->
-<!--				  href="javascript:void(0);"-->
-<!--				  data-page="2">Load More Posts</a>-->
-<!--			</div>-->
 		</div>
 		<div class="sidebar">
 			<h1>Popular Posts</h1>
@@ -83,35 +71,4 @@
 			</ul>
 		</div>
 	</div>
-<script>
-	    (function($) {
-      $('#lazyLoadLink').on('click', function() {
-        var link = $(this);
-        var page = link.data('page');
-        $.ajax({
-          type: 'post',
-          url: '/lazy_load_posts/',
-          data: {
-            'page': page,
-            'csrfmiddlewaretoken': window.CSRF_TOKEN // from index.html
-          },
-          success: function(data) {
-            // if there are still more pages to load,
-            // add 1 to the "Load More Posts" link's page data attribute
-            // else hide the link
-            if (data.has_next) {
-                link.data('page', page+1);
-            } else {
-              link.hide();
-            }
-            // append html to the posts div
-            $('#div').append(data.posts_html);
-          },
-          error: function(xhr, status, error) {
-            // shit happens friends!
-          }
-        });
-      });
-    }(jQuery));
-</script>
 {% endblock %}

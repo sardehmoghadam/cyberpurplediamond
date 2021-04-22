@@ -1,6 +1,23 @@
-{% for post in posts %}
-<div>
-  <h4>{{ post.title }}</h4>
-  <p>{{ post.content }}</p>
-</div>
-{% endfor %}
+{% extends "temp/layout.html" %}
+{% load static %}
+{% block body %}
+	<div id="contents">
+		<div class="post">
+			<div class="date">
+				<p>
+					<span>03</span>
+					2023
+				</p>
+			</div>
+			<h1>{{ content.topic}}<span class="author">{{ content.reference }}</span></h1>
+			<img id="postpic" src="{% static 'temp/images/home2.png' %}" alt="Img">
+			<img id="postpic" src="{% static 'temp/images/f"{{content.img.url}}"' %}" alt="Img">
+			<img id="postpic" src="{{content.img.url}}">
+			{{content.img.url}}
+			<p>
+				{{ content.content | linebreaks }}
+			</p>
+			<span><a href="{% url 'temp:news' %}" class="more">Back to News</a></span>
+		</div>
+	</div>
+{% endblock %}

@@ -23,14 +23,19 @@ body {
 	font-family: 'OpenSans';
 	margin: 0;
 }
-img {
-    background: url("images/backmain.jpg") no-repeat center center fixed;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
 
+img {
+    border-radius: 50%;
 	border: 0;
+    width: 250px;
+    height: auto;
+
+}
+#postpic {
+
+    width: 880px;
+    height: auto;
+
 }
 .clearfix:after, #contents:after {
 	clear:both;
@@ -55,6 +60,11 @@ img {
 .btn:hover {
 	background-position: 0 0;
 }
+
+.homebullet {
+
+}
+
 /*------------------------------ HEADER ------------------------------*/
 #header {
 	background-color: purple;
@@ -159,9 +169,11 @@ img {
 /*------------------------------ CONTENTS ------------------------------*/
 #contents {
 	min-height: 510px;
-	width: 880px;
+	width: 1000px;
 	margin: 0 auto;
 	padding: 54px 40px;
+	text-align: justify;
+	text-justify: inter-word;
 }
 h1 {
 	color: #003300;
@@ -195,7 +207,7 @@ p a {
 	margin: 0 20px;
 }
 #contents .features {
-	width: 810px;
+	width: 1000px;
 	margin: 0 auto;
 }
 .features > div {
@@ -487,7 +499,7 @@ p a {
   padding: 16px 20px;
   border: none;
   cursor: pointer;
-  width: 26 0px;
+  width: 260px;
   margin-bottom:10px;
   opacity: 0.8;
 }

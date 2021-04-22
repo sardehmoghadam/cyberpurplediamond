@@ -58,9 +58,11 @@
 				<li>
 					<a href="{% url 'temp:contact' %}">Contact</a>
 				</li>
+				{% if flag %}
 				<li>
 					<a href="{% url 'temp:register' %}">Register</a>
 				</li>
+				{% endif %}
 			</ul>
 		</div>
 	</div>

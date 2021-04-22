@@ -204,8 +204,10 @@ def post_detail(request, pk):
         flag = True
     content = blog.objects.get(pk=pk)
     content.totalread = content.totalread + 1
-    return render(request, f"temp/posts/{pk}.html" , {
-        "flag": flag
+    content.save()
+    return render(request, "temp/post.html", {
+        "flag": flag,
+        "content": content
     })
 
 def lazy_load_posts(request):

@@ -10,9 +10,9 @@
 				</p>
 			</div>
 			<h1>{{ content.topic}}<span class="author">{{ content.reference }}</span></h1>
-			<img src="{{content.img.url}}">
+			<img id="postpic" src="{{content.img.url}}">
 			<p>
-				{{ content.content }}
+				{{ content.content | linebreaks }}
 			</p>
 			<span><a href="{% url 'temp:news' %}" class="more">Back to News</a></span>
 		</div>
