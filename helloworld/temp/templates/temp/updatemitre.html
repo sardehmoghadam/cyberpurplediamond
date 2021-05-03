@@ -1,0 +1,17 @@
+{% extends 'temp/layout.html' %}
+{% load static %}
+{% block body %}
+            {% if flag %}
+			<p>
+				You have to login to use this feature. Please login or register via corner box of the site.
+			</p>
+            {% endif %}
+			{% if flag == False %}
+
+            <form action="{% url 'temp:updatemitre' %}" method="POST">
+                {% csrf_token %}
+                <input type="submit" method="POST" >Update Mitre Matrix </input>
+            </form>
+			{% endif %}
+{% endblock %}
+

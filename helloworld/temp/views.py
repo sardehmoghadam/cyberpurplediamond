@@ -1,5 +1,5 @@
 from django.contrib.auth import login, logout, authenticate
-from .models import contactmodel, blog
+from .models import contactmodel, blog, tactics, techniques
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
@@ -241,3 +241,18 @@ def lazy_load_posts(request):
         'has_next': posts.has_next()
     }
     return JsonResponse(output_data)
+
+def updatemitre(request):
+    flag = False
+    if not request.user.is_authenticated:
+        flag = True
+    if request.method == "POST":
+        attack = Attck()
+        for tactic in attack.enterprise.tactics:
+            q = tactics()
+            q.identifier = tactic.id
+            q.name = tactic.name
+            q.save()
+    return render(request, "temp/updatemitre.html", {
+        "flag": flag,
+    })

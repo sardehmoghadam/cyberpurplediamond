@@ -14,4 +14,5 @@ urlpatterns = [
     path("mitrematrix", views.mitrematrix, name="mitrematrix"),
     path('activate/<uidb64>/<token>/', views.activate, name="activate"),
     path("<int:pk>/", views.post_detail, name="post_detail"),
+    path("updatemitre", views.updatemitre, name="updatemitre"),
 ]
