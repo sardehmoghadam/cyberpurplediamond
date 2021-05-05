@@ -5,45 +5,11 @@
 		<div class="features">
 			<h1>Threat Simulation</h1>
 			{% if flag %}
-<!--			<link href="{% static 'temp/style.css' %}" rel="stylesheet">-->
 			<p>
 				You have to login to use this feature. Please login or register via corner box of the site.
 			</p>
 			{% endif %}
 			{% if flag == False %}
-<!--			<link href="{% static 'temp/loginstyle.css' %}" rel="stylesheet">-->
-<!--			<div class="navbar">-->
-<!--			  <div class="dropdown">-->
-<!--				<button class="dropbtn">Tactics-->
-<!--				  <i class="fa fa-caret-down"></i>-->
-<!--				</button>-->
-<!--				<div class="dropdown-content">-->
-<!--				  <a id="defaultOpen" class="tablink" onclick="openPage('tactics', this, 'purple')">Just tactics</a>-->
-<!--				  <a  class="tablink" onclick="openPage('techniques', this, 'purple')">Tactics with techniques</a>-->
-
-<!--				</div>-->
-<!--			  </div>-->
-<!--				<div class="dropdown">-->
-<!--				<button class="dropbtn">Techniques-->
-<!--				  <i class="fa fa-caret-down"></i>-->
-<!--				</button>-->
-<!--				<div class="dropdown-content">-->
-<!--				  <a href="#">Link 1</a>-->
-<!--				  <a href="#">Link 2</a>-->
-<!--				  <a href="#">Link 3</a>-->
-<!--				</div>-->
-<!--				</div>-->
-<!--				<div class="dropdown">-->
-<!--				<button class="dropbtn">Tools-->
-<!--				  <i class="fa fa-caret-down"></i>-->
-<!--				</button>-->
-<!--				<div class="dropdown-content">-->
-<!--				  <a href="#">Link 1</a>-->
-<!--				  <a href="#">Link 2</a>-->
-<!--				  <a href="#">Link 3</a>-->
-<!--				</div>-->
-<!--			  </div>-->
-<!--			</div>-->
 			<button id="defaultOpen" class="tablink" onclick="openPage('tactics', this, 'purple')">Tactics</button>
 			<button class="tablink" onclick="openPage('techniques', this, 'purple')">Techniques</button>
 			<button class="tablink" onclick="openPage('malwares', this, 'purple')">Malwares</button>
