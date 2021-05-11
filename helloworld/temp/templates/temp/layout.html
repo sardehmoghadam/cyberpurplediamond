@@ -20,7 +20,8 @@
         gtag('config', 'UA-62667723-1');
     </script>
     <meta name="google-site-verification" content="2oJKLqNN62z6AOCb0A0IXGtbQuj-lev5YPAHFF_cbHQ">
-
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -38,8 +39,13 @@
 				<li>
 					<a href="{% url 'temp:index' %}">Home</a>
 				</li>
-				<li>
-					<a href="{% url 'temp:feature' %}">Threat Simulation</a>
+				<li class="dropdown">
+					<a class="dropbtn">Explore</a>
+					    <div class="dropdown-content">
+						  <a href="{% url 'temp:feature' %}">MITRE Enterprise ATT&CK framework</a>
+						  <a href="{% url 'temp:preattck' %}">MITRE PreAttck ATT&CK framework</a>
+						  <a href="{% url 'temp:mobile' %}">MITRE Mobile ATT&CK framework</a>
+						</div>
 				</li>
 				<li>
 					<a href="{% url 'temp:mitrematrix' %}">MITRE Matrix</a>
@@ -54,15 +60,37 @@
 					<a href="{% url 'temp:contact' %}">Contact</a>
 				</li>
 				{% if flag %}
-				<li>
-					<a href="{% url 'temp:register' %}">Register</a>
-				</li>
+<!--				<li>-->
+<!--					<a href="{% url 'temp:register' %}">Register</a>-->
+<!--				</li>-->
 				{% endif %}
 			</ul>
 		</div>
 	</div>
 {% block body %}
 {% endblock %}
+			{% if flag %}
+			<div>
+				<button class="register-button" onclick="openregisterForm()">Register</button>
+				<div class="registerform-popup" id="registerForm">
+				  <form action="{% url 'temp:register' %}" class="form-container" method="POST">
+					{% csrf_token %}
+					<h1>Register</h1>
+<!--					<label for="username"><b>Username</b></label>-->
+<!--					<input type="text" placeholder="Enter username" name="name" required>-->
+<!--					<label for="email"><b>Email</b></label>-->
+<!--					<input type="text" placeholder="Enter email address" name="email" required>-->
+<!--					<label for="psw"><b>Password</b></label>-->
+<!--					<input type="password" placeholder="Enter Password" name="password" required>-->
+<!--					<label for="confpsw"><b>Confirm Password</b></label>-->
+<!--					<input type="password" placeholder="Confirm Password" name="confirmpassword" required>-->
+					  {{ form }}
+					<button type="submit" class="btnlogin">Register</button>
+					<button type="button" class="cancellogin" onclick="closeregisterForm()">Close</button>
+				  </form>
+				</div>
+			</div>
+			{% endif %}
 			{% if flag %}
 			<div>
 				<button class="open-button" onclick="openForm()">Login</button>
@@ -74,6 +102,7 @@
 					<input type="text" placeholder="Enter username" name="username" required>
 					<label for="psw"><b>Password</b></label>
 					<input type="password" placeholder="Enter Password" name="password" required>
+					<a href="{% url 'temp:register' %}">Forgot your password?</a><br>
 					<button type="submit" class="btnlogin">Login</button>
 					<button type="button" class="cancellogin" onclick="closeForm()">Close</button>
 				  </form>

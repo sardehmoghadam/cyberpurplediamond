@@ -66,3 +66,10 @@ class maxview(models.Model):
 
     def __str__(self):
         return f"postID: {self.postid}, postview: {self.postview}"
+
+class refer(models.Model):
+
+    referid = models.IntegerField()
+
+    def __str__(self):
+        return f"referID: {self.referid}"

@@ -3,14 +3,14 @@
 {% block body %}
 	<div id="contents">
 		<div class="post">
-			<div class="date">
-				<p>
-					<span>03</span>
-					2023
-				</p>
-			</div>
+<!--			<div class="date">-->
+<!--				<p>-->
+<!--					<span>03</span>-->
+<!--					2023-->
+<!--				</p>-->
+<!--			</div>-->
 			<h1>{{ content.topic}}<span class="author">{{ content.reference }}</span></h1>
-			<img id="postpic" src="{% static 'temp/images/home2.png' %}" alt="Img">
+			<img id="postpic" src="{% static 'temp/images/logo.png' %}" alt="Img">
 			<img id="postpic" src="{% static 'temp/images/f"{{content.img.url}}"' %}" alt="Img">
 			<img id="postpic" src="{{content.img.url}}">
 			{{content.img.url}}

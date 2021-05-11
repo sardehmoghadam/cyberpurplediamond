@@ -6,6 +6,15 @@ function openForm() {
 	  document.getElementById("myForm").style.display = "none";
 	}
 
+function openregisterForm() {
+	  document.getElementById("registerForm").style.display = "block";
+	}
+
+	function closeregisterForm() {
+	  document.getElementById("registerForm").style.display = "none";
+	}
+
+
 var check = function() {
   if (document.getElementById('password').value ==
     document.getElementById('confirmpassword').value) {
@@ -58,6 +67,57 @@ var openPage = function(pageName, elmnt, color) {
 
 
 }
+
+var openMenu = function(pageName, elmnt, color) {
+  // Hide all elements with class="tabcontent" by default */
+  var i, firsttabcontent, firsttablinks;
+  tabcontent = document.getElementsByClassName("firsttabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Remove the background color of all tablinks/buttons
+  tablinks = document.getElementsByClassName("firsttablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+
+  // Show the specific tab content
+  document.getElementById(pageName).style.display = "block";
+
+  // Add the specific color to the button used to open the tab content
+  elmnt.style.backgroundColor = color;
+  document.getElementById(pageName).innerHTML='<object type="type/html" data="temp/mitrehtml.html" ></object>';
+
+
+}
+
+var openMenu1 = function(pageName, elmnt, color) {
+  // Hide all elements with class="tabcontent" by default */
+  var i, firsttabcontent, firsttablinks;
+  tabcontent = document.getElementsByClassName("firsttabcontent");
+  for (i = 0; i < tabcontent.length; i++) {
+    tabcontent[i].style.display = "none";
+  }
+
+  // Remove the background color of all tablinks/buttons
+  tablinks = document.getElementsByClassName("firsttablink");
+  for (i = 0; i < tablinks.length; i++) {
+    tablinks[i].style.backgroundColor = "";
+  }
+
+  // Show the specific tab content
+  document.getElementById(pageName).style.display = "block";
+
+  // Add the specific color to the button used to open the tab content
+  elmnt.style.backgroundColor = color;
+    pageName.InnerHtml = "/templates/temp/mitrehtml.html";
+
+}
+
+
+
+
   document.getElementById("defaultOpen").click();
 
     (function($) {

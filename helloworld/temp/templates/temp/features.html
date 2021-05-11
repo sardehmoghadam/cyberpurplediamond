@@ -3,247 +3,250 @@
 {% block body %}
 	<div id="contents">
 		<div class="features">
-			<h1>Threat Simulation</h1>
-			{% if flag %}
-			<p>
-				You have to login to use this feature. Please login or register via corner box of the site.
-			</p>
-			{% endif %}
-			{% if flag == False %}
-			<button id="defaultOpen" class="tablink" onclick="openPage('tactics', this, 'purple')">Tactics</button>
-			<button class="tablink" onclick="openPage('techniques', this, 'purple')">Techniques</button>
-			<button class="tablink" onclick="openPage('malwares', this, 'purple')">Malwares</button>
-			<button class="tablink" onclick="openPage('actors', this, 'purple')">Actors</button>
-			<button class="tablink" onclick="openPage('tools', this, 'purple')">Tools</button>
-			<button class="tablink" onclick="openPage('mitigations', this, 'purple')">Mitigations</button>
-			<button class="expand" onclick="expand()"></button>
-			<div id="tactics" class="tabcontent">
-				{% for tactic in attack.enterprise.tactics %}
-				 <button type="button" class="collapsible">{{ tactic.id }} {{tactic.name }}</button>
-					<div class="mycascade">
-						{% for technique in tactic.techniques %}
-						<button type="button" class="collapsible">{{ technique.id}} {{ technique.name}}</button>
+				<h1>MITRE Enterprise ATT&CK framework</h1>
+				{% if flag %}
+				<p>
+					You have to login to use this feature. Please login or register via corner box of the site.
+				</p>
+				{% endif %}
+				{% if flag == False %}
+				<form>
+					<input class="searchinput" type="search" placeholder="Search.." name="search" size="10 maxlength="8"">
+					<button class="searchbutton" type="submit"><i class="fa fa-search"></i></button>
+				</form>
+				<div id="enterprise" class="firsttabcontent">
+						<button id="defaultOpen" class="tablink" onclick="openPage('tactics', this, 'purple')">Tactics</button>
+						<button class="tablink" onclick="openPage('techniques', this, 'purple')">Techniques</button>
+						<button class="tablink" onclick="openPage('malwares', this, 'purple')">Malwares</button>
+						<button class="tablink" onclick="openPage('actors', this, 'purple')">Actors</button>
+						<button class="tablink" onclick="openPage('tools', this, 'purple')">Tools</button>
+						<button class="tablink" onclick="openPage('mitigations', this, 'purple')">Mitigations</button>
+						<button class="expand" onclick="expand()"></button>
+
+					<div id="tactics" class="tabcontent">
+						{% for tactic in attack.enterprise.tactics %}
+						 <button type="button" class="collapsible">{{ tactic.id }} {{tactic.name }}</button>
 							<div class="mycascade">
-								<button type="button" class="collapsible">Platforms</button>
+								{% for technique in tactic.techniques %}
+								<button type="button" class="collapsible">{{ technique.id}} {{ technique.name}}</button>
+									<div class="mycascade">
+										<button type="button" class="collapsible">Platforms</button>
+											<div class="mycascade">
+												<ul>
+													{% for item in technique.platforms %}
+													<li>{{ item }}</li>
+													{% endfor %}
+												</ul>
+											</div>
+										<button type="button" class="collapsible">Permissions</button>
+											<div class="mycascade">
+												<ul>
+													{% for item in technique.permissions %}
+													<li>{{ item }}</li>
+													{% endfor %}
+												</ul>
+											</div>
+										<button type="button" class="collapsible">Command list</button>
+											<div class="mycascade">
+												<ul>
+													{% for item in technique.command_list %}
+													<li>{{ item }}</li>
+													{% endfor %}
+												</ul>
+											</div>
+										<button type="button" class="collapsible">Commands</button>
+											<div class="mycascade">
+												<ul>
+													{% for item in technique.commands %}
+													<li>{{ item  }}</li>
+													{% endfor %}
+												</ul>
+											</div>
+										<button type="button" class="collapsible">Queries</button>
+											<div class="mycascade">
+												<ul>
+													{% for item in technique.queries %}
+													<li>{{ item }}</li>
+													{% endfor %}
+												</ul>
+											</div>
+										<button type="button" class="collapsible">Datasets</button>
+											<div class="mycascade">
+												<ul>
+													{% for item in technique.queries %}
+													<li>{{ item }}</li>
+													{% endfor %}
+												</ul>
+											</div>
+										<button type="button" class="collapsible">Possible detections</button>
+											<div class="mycascade">
+												<ul>
+													{% for item in technique.possible_detections %}
+													<li>{{ item }}</li>
+													{% endfor %}
+												</ul>
+											</div>
+										<button type="button" class="collapsible">Description</button>
+											<div class="mycascade">
+												<ul>
+													<li>{{ technique.description}}</li>
+												</ul>
+											</div>
+										<button type="button" class="collapsible">Reference</button>
+											<div class="mycascade">
+												<ul>
+													<li><a href="{{ technique.wiki }}" target="_blank">{{ technique.wiki}}</a></li>
+												</ul>
+											</div>
+									</div>
+								{% endfor %}
+								</ul>
+							</div>
+						{% endfor %}
+
+					</div>
+
+					<div id="techniques" class="tabcontent">
+						{% for technique in attack.enterprise.techniques %}
+						 <button type="button" class="collapsible">{{ technique.id }} {{technique.name }}</button>
+							<div class="mycascade">
+								<button type="button" class="collapsible">Tactics</button>
 									<div class="mycascade">
 										<ul>
-											{% for item in technique.platforms %}
-											<li>{{ item }}</li>
-											{% endfor %}
+										{% for tactic in technique.tactics %}
+											<li>{{ tactic.id }} {{ tactic.name }}</li>
+										{% endfor %}
 										</ul>
 									</div>
-								<button type="button" class="collapsible">Permissions</button>
+								<button type="button" class="collapsible">Actors</button>
 									<div class="mycascade">
 										<ul>
-											{% for item in technique.permissions %}
-											<li>{{ item }}</li>
-											{% endfor %}
+										{% for actor in technique.actors %}
+											<li>{{ actor.id }} {{ actor.name }}</li>
+										{% endfor %}
 										</ul>
 									</div>
-								<button type="button" class="collapsible">Command list</button>
+								<button type="button" class="collapsible">Subtechniques</button>
 									<div class="mycascade">
 										<ul>
-											{% for item in technique.command_list %}
-											<li>{{ item }}</li>
-											{% endfor %}
+									{% for subtechnique in technique.subtechniques %}
+									<ul>
+										<li>{{subtechnique.id}} {{subtechnique.name}}</li>
+									</ul>
+									{% endfor %}
+									</div>
+							</div>
+						{% endfor %}
+
+					</div>
+
+					<div id="malwares" class="tabcontent">
+						{% for malware in attack.enterprise.malwares %}
+						 <button type="button" class="collapsible">{{ malware.id }} {{malware.name }}</button>
+							<div class="mycascade">
+								<button type="button" class="collapsible">Actors</button>
+									<div class="mycascade">
+										<ul>
+										{% for actor in malware.actors %}
+											<li>{{ actor.id }} {{ actor.name }}</li>
+										{% endfor %}
 										</ul>
 									</div>
-								<button type="button" class="collapsible">Commands</button>
+								<button type="button" class="collapsible">Techniques</button>
 									<div class="mycascade">
 										<ul>
-											{% for item in technique.commands %}
-											<li>{{ item  }}</li>
-											{% endfor %}
-										</ul>
-									</div>
-								<button type="button" class="collapsible">Queries</button>
-									<div class="mycascade">
-										<ul>
-											{% for item in technique.queries %}
-											<li>{{ item }}</li>
-											{% endfor %}
-										</ul>
-									</div>
-								<button type="button" class="collapsible">Datasets</button>
-									<div class="mycascade">
-										<ul>
-											{% for item in technique.queries %}
-											<li>{{ item }}</li>
-											{% endfor %}
-										</ul>
-									</div>
-								<button type="button" class="collapsible">Possible detections</button>
-									<div class="mycascade">
-										<ul>
-											{% for item in technique.possible_detections %}
-											<li>{{ item }}</li>
-											{% endfor %}
-										</ul>
-									</div>
-								<button type="button" class="collapsible">Description</button>
-									<div class="mycascade">
-										<ul>
-											<li>{{ technique.description}}</li>
-										</ul>
-									</div>
-								<button type="button" class="collapsible">Reference</button>
-									<div class="mycascade">
-										<ul>
-											<li><a href="{{ technique.wiki }}" target="_blank">{{ technique.wiki}}</a></li>
+										{% for technique in malware.techniques %}
+											<li>{{ technique.id }} {{ technique.name }}</li>
+										{% endfor %}
 										</ul>
 									</div>
 							</div>
 						{% endfor %}
-						</ul>
 					</div>
-				{% endfor %}
 
-			</div>
+					<div id="actors" class="tabcontent">
+						{% for actor in attack.enterprise.actors %}
+						 <button type="button" class="collapsible">{{ actor.id }} {{actor.name }}</button>
+							<div class="mycascade">
+								<button type="button" class="collapsible">Malwares</button>
+									<div class="mycascade">
+										<ul>
+										{% for malware in actor.malwares %}
+											<li>{{ malware.id }} {{ malware.name }}</li>
+										{% endfor %}
+										</ul>
+									</div>
+								<button type="button" class="collapsible">Tools</button>
+									<div class="mycascade">
+										<ul>
+										{% for tool in actor.tools %}
+											<li>{{ tool.id }} {{ tool.name }}</li>
+										{% endfor %}
+										</ul>
+									</div>
+								<button type="button" class="collapsible">Techniques</button>
+									<div class="mycascade">
+										<ul>
+									{% for technique in actor.techniques %}
+									<ul>
+										<li>{{technique.id}} {{technique.name}}</li>
+									</ul>
+									{% endfor %}
+									</div>
+							</div>
+						{% endfor %}
 
-			<div id="techniques" class="tabcontent">
-				{% for technique in attack.enterprise.techniques %}
-				 <button type="button" class="collapsible">{{ technique.id }} {{technique.name }}</button>
-					<div class="mycascade">
-						<button type="button" class="collapsible">Tactics</button>
-							<div class="mycascade">
-								<ul>
-								{% for tactic in technique.tactics %}
-									<li>{{ tactic.id }} {{ tactic.name }}</li>
-								{% endfor %}
-								</ul>
-							</div>
-						<button type="button" class="collapsible">Actors</button>
-							<div class="mycascade">
-								<ul>
-								{% for actor in technique.actors %}
-									<li>{{ actor.id }} {{ actor.name }}</li>
-								{% endfor %}
-								</ul>
-							</div>
-						<button type="button" class="collapsible">Subtechniques</button>
-							<div class="mycascade">
-								<ul>
-							{% for subtechnique in technique.subtechniques %}
-							<ul>
-								<li>{{subtechnique.id}} {{subtechnique.name}}</li>
-							</ul>
-							{% endfor %}
-							</div>
 					</div>
-				{% endfor %}
 
-			</div>
-
-			<div id="malwares" class="tabcontent">
-				{% for malware in attack.enterprise.malwares %}
-				 <button type="button" class="collapsible">{{ malware.id }} {{malware.name }}</button>
-					<div class="mycascade">
-						<button type="button" class="collapsible">Actors</button>
+					<div id="tools" class="tabcontent">
+						{% for tool in attack.enterprise.tools %}
+						 <button type="button" class="collapsible">{{ tool.id }} {{tool.name }}</button>
 							<div class="mycascade">
-								<ul>
-								{% for actor in malware.actors %}
-									<li>{{ actor.id }} {{ actor.name }}</li>
-								{% endfor %}
-								</ul>
+								<button type="button" class="collapsible">Techniques</button>
+									<div class="mycascade">
+										<ul>
+										{% for technique in tool.techniques %}
+											<li>{{ technique.id }} {{ technique.name }}</li>
+										{% endfor %}
+										</ul>
+									</div>
+								<button type="button" class="collapsible">Actors</button>
+									<div class="mycascade">
+										<ul>
+										{% for actor in tool.actors %}
+											<li>{{ actor.id }} {{ actor.name }}</li>
+										{% endfor %}
+										</ul>
+									</div>
 							</div>
-						<button type="button" class="collapsible">Techniques</button>
-							<div class="mycascade">
-								<ul>
-								{% for technique in malware.techniques %}
-									<li>{{ technique.id }} {{ technique.name }}</li>
-								{% endfor %}
-								</ul>
-							</div>
+						{% endfor %}
 					</div>
-				{% endfor %}
-			</div>
 
-			<div id="actors" class="tabcontent">
-				{% for actor in attack.enterprise.actors %}
-				 <button type="button" class="collapsible">{{ actor.id }} {{actor.name }}</button>
-					<div class="mycascade">
-						<button type="button" class="collapsible">Malwares</button>
+					<div id="mitigations" class="tabcontent">
+						{% for mitigation in attack.enterprise.mitigations %}
+						 <button type="button" class="collapsible">{{ mitigation.id }} {{mitigation.name }}</button>
 							<div class="mycascade">
-								<ul>
-								{% for malware in actor.malwares %}
-									<li>{{ malware.id }} {{ malware.name }}</li>
-								{% endfor %}
-								</ul>
+								<button type="button" class="collapsible">Techniques</button>
+									<div class="mycascade">
+										<ul>
+										{% for technique in tool.techniques %}
+											<li>{{ technique.id }} {{ technique.name }}</li>
+										{% endfor %}
+										</ul>
+									</div>
+								<button type="button" class="collapsible">Actors</button>
+									<div class="mycascade">
+										<ul>
+										{% for actor in tool.actors %}
+											<li>{{ actor.id }} {{ actor.name }}</li>
+										{% endfor %}
+										</ul>
+									</div>
 							</div>
-						<button type="button" class="collapsible">Tools</button>
-							<div class="mycascade">
-								<ul>
-								{% for tool in actor.tools %}
-									<li>{{ tool.id }} {{ tool.name }}</li>
-								{% endfor %}
-								</ul>
-							</div>
-						<button type="button" class="collapsible">Techniques</button>
-							<div class="mycascade">
-								<ul>
-							{% for technique in actor.techniques %}
-							<ul>
-								<li>{{technique.id}} {{technique.name}}</li>
-							</ul>
-							{% endfor %}
-							</div>
-					</div>
-				{% endfor %}
-
-			</div>
-
-			<div id="tools" class="tabcontent">
-				{% for tool in attack.enterprise.tools %}
-				 <button type="button" class="collapsible">{{ tool.id }} {{tool.name }}</button>
-					<div class="mycascade">
-						<button type="button" class="collapsible">Techniques</button>
-							<div class="mycascade">
-								<ul>
-								{% for technique in tool.techniques %}
-									<li>{{ technique.id }} {{ technique.name }}</li>
-								{% endfor %}
-								</ul>
-							</div>
-						<button type="button" class="collapsible">Actors</button>
-							<div class="mycascade">
-								<ul>
-								{% for actor in tool.actors %}
-									<li>{{ actor.id }} {{ actor.name }}</li>
-								{% endfor %}
-								</ul>
-							</div>
-					</div>
-				{% endfor %}
-
-			</div>
-
-			<div id="mitigations" class="tabcontent">
-				{% for mitigation in attack.enterprise.mitigations %}
-				 <button type="button" class="collapsible">{{ mitigation.id }} {{mitigation.name }}</button>
-					<div class="mycascade">
-						<button type="button" class="collapsible">Techniques</button>
-							<div class="mycascade">
-								<ul>
-								{% for technique in tool.techniques %}
-									<li>{{ technique.id }} {{ technique.name }}</li>
-								{% endfor %}
-								</ul>
-							</div>
-						<button type="button" class="collapsible">Actors</button>
-							<div class="mycascade">
-								<ul>
-								{% for actor in tool.actors %}
-									<li>{{ actor.id }} {{ actor.name }}</li>
-								{% endfor %}
-								</ul>
-							</div>
-					</div>
-				{% endfor %}
-
-			</div>
-
-			{% endif %}
-			</div>
+						{% endfor %}
+						</div>
+				</div>
+		{% endif %}
 		</div>
 	</div>
 			<script>

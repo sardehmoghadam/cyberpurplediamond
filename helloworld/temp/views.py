@@ -16,15 +16,18 @@ from pyattck import Attck
 from django.template import loader
 from django.core.paginator import Paginator, EmptyPage, PageNotAnInteger
 from django.http import JsonResponse
+from .forms import RegistrationForm
 from django.contrib.auth import get_user_model
 # Create your views here.
 
 def index(request):
+    form = RegistrationForm()
     flag = False
     if not request.user.is_authenticated:
         flag = True
     return render(request, "temp/index.html",{
-        "flag": flag
+        "flag": flag,
+        "form": form
     })
 
 def contact(request):
@@ -64,6 +67,26 @@ def feature(request):
         print(technique.id)
         print(technique.name)
     return render(request, "temp/features.html", {
+        "flag": flag,
+        'attack': attack
+    })
+
+def preattck(request):
+    flag = False
+    if not request.user.is_authenticated:
+        flag = True
+    attack = Attck()
+    return render(request, "temp/preattck.html", {
+        "flag": flag,
+        'attack': attack
+    })
+
+def mobile(request):
+    flag = False
+    if not request.user.is_authenticated:
+        flag = True
+    attack = Attck()
+    return render(request, "temp/mobile.html", {
         "flag": flag,
         'attack': attack
     })
@@ -147,7 +170,7 @@ def register(request):
             email = EmailMessage(
                 mail_subject, message, to=[useremail]
             )
-            email.send()
+            # email.send()
 
             return HttpResponse('Please confirm your email address to complete the registration')
         else:
@@ -164,14 +187,28 @@ def register(request):
             "flag": flag,
     })
 
+def registerform(request):
+    if request.method == "POST":
+        form = RegistrationForm(request.POST)
+        if form.is_valid():
+            form.save()
+        return redirect("")
+    else:
+        form = RegisterForm()
+        return render(response, "",
+            {
+                "form":form
+        })
+
 def log_out(request):
     logout(request)
     return HttpResponseRedirect(reverse("temp:index"))
 
 def logging(request):
     if request.method == "POST":
-        username = request.POST["username"]
+        email = request.POST["username"]
         password = request.POST["password"]
+        username = User.objects.get(email=email)
         user = authenticate(request, username=username, password=password)
         if user is not None:
             login(request, user)

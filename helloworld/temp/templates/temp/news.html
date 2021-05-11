@@ -16,7 +16,7 @@
 <!--					</div>-->
 					<h2>{{ post.topic}}<span>{{ post.reference }}</span></h2>
 					<p>
-						{{ post.content | slice:":255"}} <span><a href="{% url 'temp:post_detail' post.pk%}" class="more">Read More</a></span>
+						{{ post.content | slice:":255"}}... <span><a href="{% url 'temp:post_detail' post.pk%}" class="more">Read More</a></span>
 					</p>
 				</li>
 				{% endfor %}
