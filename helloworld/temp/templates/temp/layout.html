@@ -60,9 +60,9 @@
 					<a href="{% url 'temp:contact' %}">Contact</a>
 				</li>
 				{% if flag %}
-<!--				<li>-->
-<!--					<a href="{% url 'temp:register' %}">Register</a>-->
-<!--				</li>-->
+				<li>
+					<a href="{% url 'temp:register' %}">Register</a>
+				</li>
 				{% endif %}
 			</ul>
 		</div>
@@ -84,7 +84,10 @@
 <!--					<input type="password" placeholder="Enter Password" name="password" required>-->
 <!--					<label for="confpsw"><b>Confirm Password</b></label>-->
 <!--					<input type="password" placeholder="Confirm Password" name="confirmpassword" required>-->
-					  {{ form }}
+					<input type="text" placeholder="Name" name="name" onFocus="this.select();" onMouseOut="javascript:return false;" required />
+					<input type="email" placeholder="Email" name="email" onFocus="this.select();" onMouseOut="javascript:return false;" required/>
+					<input type="password" placeholder="Enter Password" name="password" id="password" onFocus="this.select();" onMouseOut="javascript:return false;" onkeyup='passwordChanged();' required/>
+					<input type="password" placeholder="Confirm Password"  name="confirmpassword" id="confirmpassword" onFocus="this.select();" onMouseOut="javascript:return false;" onkeyup='check();' required/>
 					<button type="submit" class="btnlogin">Register</button>
 					<button type="button" class="cancellogin" onclick="closeregisterForm()">Close</button>
 				  </form>

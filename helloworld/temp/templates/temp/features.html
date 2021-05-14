@@ -34,7 +34,9 @@
 											<div class="mycascade">
 												<ul>
 													{% for item in technique.platforms %}
-													<li>{{ item }}</li>
+														<li>{{ item }}</li>
+													{% empty %}
+														<li>There is no registered data for this item</li>
 													{% endfor %}
 												</ul>
 											</div>
@@ -42,7 +44,9 @@
 											<div class="mycascade">
 												<ul>
 													{% for item in technique.permissions %}
-													<li>{{ item }}</li>
+														<li>{{ item }}</li>
+													{% empty %}
+														<li>There is no registered data for this item</li>
 													{% endfor %}
 												</ul>
 											</div>
@@ -50,15 +54,23 @@
 											<div class="mycascade">
 												<ul>
 													{% for item in technique.command_list %}
-													<li>{{ item }}</li>
+														<li>{{ item }}</li>
+													{% empty %}
+														<li>There is no registered data for this item</li>
 													{% endfor %}
 												</ul>
 											</div>
-										<button type="button" class="collapsible">Commands</button>
+										<button type="button" class="collapsible">Commands Reference</button>
 											<div class="mycascade">
+
 												<ul>
 													{% for item in technique.commands %}
-													<li>{{ item  }}</li>
+														{% for key, value in item.items %}
+															<li>{{ key }}: {{value}}</li>
+														{% endfor %}
+													<a>---------------------------------------------------------------------------</a>
+													{% empty %}
+														<li>There is no registered data for this item</li>
 													{% endfor %}
 												</ul>
 											</div>
@@ -66,7 +78,12 @@
 											<div class="mycascade">
 												<ul>
 													{% for item in technique.queries %}
-													<li>{{ item }}</li>
+														{% for key, value in item.items %}
+																<li>{{ key }}: {{value}}</li>
+														{% endfor %}
+														<a>---------------------------------------------------------------------------</a>
+													{% empty %}
+														<li>There is no registered data for this item</li>
 													{% endfor %}
 												</ul>
 											</div>
@@ -74,7 +91,12 @@
 											<div class="mycascade">
 												<ul>
 													{% for item in technique.queries %}
-													<li>{{ item }}</li>
+														{% for key, value in item.items %}
+															<li>{{ key }}: {{value}}</li>
+														{% endfor %}
+														<a>---------------------------------------------------------------------------</a>
+													{% empty %}
+														<li>There is no registered data for this item</li>
 													{% endfor %}
 												</ul>
 											</div>
@@ -82,7 +104,12 @@
 											<div class="mycascade">
 												<ul>
 													{% for item in technique.possible_detections %}
-													<li>{{ item }}</li>
+														{% for key, value in item.items %}
+															<li>{{ key }}: {{value}}</li>
+														{% endfor %}
+														<a>---------------------------------------------------------------------------</a>
+													{% empty %}
+														<li>There is no registered data for this item</li>
 													{% endfor %}
 												</ul>
 											</div>
@@ -115,6 +142,8 @@
 										<ul>
 										{% for tactic in technique.tactics %}
 											<li>{{ tactic.id }} {{ tactic.name }}</li>
+										{% empty %}
+											<li>There is no registered data for this item</li>
 										{% endfor %}
 										</ul>
 									</div>
@@ -123,6 +152,8 @@
 										<ul>
 										{% for actor in technique.actors %}
 											<li>{{ actor.id }} {{ actor.name }}</li>
+										{% empty %}
+											<li>There is no registered data for this item</li>
 										{% endfor %}
 										</ul>
 									</div>
@@ -132,6 +163,8 @@
 									{% for subtechnique in technique.subtechniques %}
 									<ul>
 										<li>{{subtechnique.id}} {{subtechnique.name}}</li>
+									{% empty %}
+										<li>There is no registered data for this item</li>
 									</ul>
 									{% endfor %}
 									</div>
@@ -149,6 +182,8 @@
 										<ul>
 										{% for actor in malware.actors %}
 											<li>{{ actor.id }} {{ actor.name }}</li>
+										{% empty %}
+											<li>There is no registered data for this item</li>
 										{% endfor %}
 										</ul>
 									</div>
@@ -157,6 +192,8 @@
 										<ul>
 										{% for technique in malware.techniques %}
 											<li>{{ technique.id }} {{ technique.name }}</li>
+										{% empty %}
+											<li>There is no registered data for this item</li>
 										{% endfor %}
 										</ul>
 									</div>
@@ -173,6 +210,8 @@
 										<ul>
 										{% for malware in actor.malwares %}
 											<li>{{ malware.id }} {{ malware.name }}</li>
+										{% empty %}
+											<li>There is no registered data for this item</li>
 										{% endfor %}
 										</ul>
 									</div>
@@ -181,6 +220,8 @@
 										<ul>
 										{% for tool in actor.tools %}
 											<li>{{ tool.id }} {{ tool.name }}</li>
+										{% empty %}
+											<li>There is no registered data for this item</li>
 										{% endfor %}
 										</ul>
 									</div>
@@ -190,6 +231,8 @@
 									{% for technique in actor.techniques %}
 									<ul>
 										<li>{{technique.id}} {{technique.name}}</li>
+									{% empty %}
+										<li>There is no registered data for this item</li>
 									</ul>
 									{% endfor %}
 									</div>
@@ -207,6 +250,8 @@
 										<ul>
 										{% for technique in tool.techniques %}
 											<li>{{ technique.id }} {{ technique.name }}</li>
+										{% empty %}
+											<li>There is no registered data for this item</li>
 										{% endfor %}
 										</ul>
 									</div>
@@ -215,6 +260,8 @@
 										<ul>
 										{% for actor in tool.actors %}
 											<li>{{ actor.id }} {{ actor.name }}</li>
+										{% empty %}
+											<li>There is no registered data for this item</li>
 										{% endfor %}
 										</ul>
 									</div>

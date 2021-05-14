@@ -9,10 +9,11 @@
 			</p>
 			<form action="{% url 'temp:register' %}" method="POST" class="message">
 				{% csrf_token %}
-				<input type="text" placeholder="Name" name="name" onFocus="this.select();" onMouseOut="javascript:return false;" required />
-				<input type="email" placeholder="Email" name="email" onFocus="this.select();" onMouseOut="javascript:return false;" required/>
-				<input type="password" placeholder="Enter Password" name="password" id="password" onFocus="this.select();" onMouseOut="javascript:return false;" onkeyup='passwordChanged();' required/>
-				<input type="password" placeholder="Confirm Password"  name="confirmpassword" id="confirmpassword" onFocus="this.select();" onMouseOut="javascript:return false;" onkeyup='check();' required/>
+<!--				<input type="text" placeholder="Name" name="name" onFocus="this.select();" onMouseOut="javascript:return false;" required />-->
+<!--				<input type="email" placeholder="Email" name="email" onFocus="this.select();" onMouseOut="javascript:return false;" required/>-->
+<!--				<input type="password" placeholder="Enter Password" name="password" id="password" onFocus="this.select();" onMouseOut="javascript:return false;" onkeyup='passwordChanged();' required/>-->
+<!--				<input type="password" placeholder="Confirm Password"  name="confirmpassword" id="confirmpassword" onFocus="this.select();" onMouseOut="javascript:return false;" onkeyup='check();' required/>-->
+				{{ form }}
 				<input type="submit" value="Submit"/>
 			</form>
 		</div>

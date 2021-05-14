@@ -150,8 +150,9 @@ def register(request):
     flag = False
     if not request.user.is_authenticated:
         flag = True
+    form = RegistrationForm(request.POST)
     if request.method == "POST":
-        name = request.POST["name"]
+        name = request.POST["username"]
         useremail = request.POST["email"]
         password = request.POST["password"]
         confirmpassword = request.POST["confirmpassword"]
@@ -185,6 +186,7 @@ def register(request):
         # })
         return render(request, "temp/login.html", {
             "flag": flag,
+            "form": form,
     })
 
 def registerform(request):
