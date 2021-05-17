@@ -6,3 +6,8 @@ from models import contactmodel, users
 #     # if user.name == username:
 #     #     login(request, user)
 #     print(f"{user}")
+
+from pyattck import Attck
+
+attack = Attck()
+print(attack)

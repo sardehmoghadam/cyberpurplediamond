@@ -24,6 +24,7 @@
 						<button class="expand" onclick="expand()"></button>
 
 					<div id="tactics" class="tabcontent">
+
 						{% for tactic in attack.enterprise.tactics %}
 						 <button type="button" class="collapsible">{{ tactic.id }} {{tactic.name }}</button>
 							<div class="mycascade">
@@ -69,19 +70,6 @@
 															<li>{{ key }}: {{value}}</li>
 														{% endfor %}
 													<a>---------------------------------------------------------------------------</a>
-													{% empty %}
-														<li>There is no registered data for this item</li>
-													{% endfor %}
-												</ul>
-											</div>
-										<button type="button" class="collapsible">Queries</button>
-											<div class="mycascade">
-												<ul>
-													{% for item in technique.queries %}
-														{% for key, value in item.items %}
-																<li>{{ key }}: {{value}}</li>
-														{% endfor %}
-														<a>---------------------------------------------------------------------------</a>
 													{% empty %}
 														<li>There is no registered data for this item</li>
 													{% endfor %}
@@ -159,10 +147,19 @@
 									</div>
 								<button type="button" class="collapsible">Subtechniques</button>
 									<div class="mycascade">
-										<ul>
-									{% for subtechnique in technique.subtechniques %}
 									<ul>
+									{% for subtechnique in technique.subtechniques %}
 										<li>{{subtechnique.id}} {{subtechnique.name}}</li>
+									{% empty %}
+										<li>There is no registered data for this item</li>
+									</ul>
+									{% endfor %}
+									</div>
+								<button type="button" class="collapsible">Mitigation</button>
+									<div class="mycascade">
+									<ul>
+									{% for mitigation in technique.mitigations %}
+										<li>{{mitigation.id}} {{mitigation.description}}</li>
 									{% empty %}
 										<li>There is no registered data for this item</li>
 									</ul>
@@ -227,9 +224,8 @@
 									</div>
 								<button type="button" class="collapsible">Techniques</button>
 									<div class="mycascade">
-										<ul>
-									{% for technique in actor.techniques %}
 									<ul>
+									{% for technique in actor.techniques %}
 										<li>{{technique.id}} {{technique.name}}</li>
 									{% empty %}
 										<li>There is no registered data for this item</li>
@@ -276,16 +272,8 @@
 								<button type="button" class="collapsible">Techniques</button>
 									<div class="mycascade">
 										<ul>
-										{% for technique in tool.techniques %}
+										{% for technique in mitigation.techniques %}
 											<li>{{ technique.id }} {{ technique.name }}</li>
-										{% endfor %}
-										</ul>
-									</div>
-								<button type="button" class="collapsible">Actors</button>
-									<div class="mycascade">
-										<ul>
-										{% for actor in tool.actors %}
-											<li>{{ actor.id }} {{ actor.name }}</li>
 										{% endfor %}
 										</ul>
 									</div>
@@ -293,7 +281,7 @@
 						{% endfor %}
 						</div>
 				</div>
-		{% endif %}
+				{% endif %}
 		</div>
 	</div>
 			<script>

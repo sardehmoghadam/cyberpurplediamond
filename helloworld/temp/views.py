@@ -62,10 +62,6 @@ def feature(request):
     if not request.user.is_authenticated:
         flag = True
     attack = Attck()
-
-    for technique in attack.enterprise.techniques:
-        print(technique.id)
-        print(technique.name)
     return render(request, "temp/features.html", {
         "flag": flag,
         'attack': attack
