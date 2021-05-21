@@ -1,5 +1,6 @@
 from django.db import models
 from pyattck import Attck
+from django.utils import timezone
 
 attack = Attck()
 from django.contrib.auth.models import AbstractUser, User
@@ -39,7 +40,7 @@ class blog(models.Model):
     def __str__(self):
         return f"{self.pk}: Topic: {self.topic} , Month: {self.month}, year: {self.year} "
 
-class tactics(models.Model):
+class tactic(models.Model):
 
     identifier = models.CharField(max_length=64)
     name = models.CharField(max_length=128)
@@ -48,9 +49,34 @@ class tactics(models.Model):
         return f"{self.pk}: {self.identifier}"
 
 
-class techniques(models.Model):
 
-    tactic = models.ForeignKey(tactics, on_delete=models.CASCADE)
+class mitigation(models.Model):
+
+    identifier = models.CharField(max_length=64)
+    name = models.CharField(max_length=128)
+    description = models.CharField(max_length=2048)
+    stix = models.CharField(max_length=512)
+    reference = models.CharField(max_length=2048)
+
+    def __str__(self):
+        return f"{self.pk}: {self.identifier}"
+
+
+class technique(models.Model):
+
+    rel_tactic = models.ForeignKey(tactic, on_delete=models.CASCADE)
+    rel_mitigation = models.ManyToManyField(mitigation)
+    identifier = models.CharField(max_length=64)
+    name = models.CharField(max_length=128)
+    description = models.CharField(max_length=2048)
+    platform = models.CharField(max_length=128)
+
+    def __str__(self):
+        return f"{self.pk}: {self.identifier}"
+
+class subtechnique(models.Model):
+
+    rel_technique = models.ForeignKey(technique, on_delete=models.CASCADE)
     identifier = models.CharField(max_length=64)
     name = models.CharField(max_length=128)
     description = models.CharField(max_length=2048)

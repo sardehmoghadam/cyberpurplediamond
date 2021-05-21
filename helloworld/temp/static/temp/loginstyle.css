@@ -649,7 +649,7 @@ p a {
 
 
 /* Style the button that is used to open and close the collapsible content */
-.collapsible, .mycascade li {
+.collapsible, .mycascade li{
   background-color: #eee;
   color: #444;
   cursor: pointer;
@@ -659,6 +659,21 @@ p a {
   text-align: left;
   outline: none;
   font-size: 15px;
+}
+
+.mycascade p {
+  background-color: #ccc;
+  border: 1px solid ;
+  border-radius: 25px;
+  color: #444;
+  padding: 18px;
+  width: inherit;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  text-align: justify;
+  margin-top: 5px;
+  margin-right: 5px;
 }
 
 /* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
@@ -739,3 +754,5 @@ p a {
 .dropdown:hover .dropdown-content {
   display: block;
 }
+
+

@@ -1,5 +1,5 @@
 from django.contrib.auth import login, logout, authenticate
-from .models import contactmodel, blog, tactics, techniques
+from .models import contactmodel, blog, tactic, technique
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
