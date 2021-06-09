@@ -40,10 +40,13 @@ class blog(models.Model):
     def __str__(self):
         return f"{self.pk}: Topic: {self.topic} , Month: {self.month}, year: {self.year} "
 
-class tactic(models.Model):
+class TACTIC(models.Model):
 
     identifier = models.CharField(max_length=64)
     name = models.CharField(max_length=128)
+    description = models.CharField(max_length=4096)
+    reference = models.CharField(max_length=2048)
+    stix = models.CharField(max_length=512)
 
     def __str__(self):
         return f"{self.pk}: {self.identifier}"
@@ -54,33 +57,78 @@ class mitigation(models.Model):
 
     identifier = models.CharField(max_length=64)
     name = models.CharField(max_length=128)
-    description = models.CharField(max_length=2048)
+    description = models.CharField(max_length=4096)
     stix = models.CharField(max_length=512)
     reference = models.CharField(max_length=2048)
 
     def __str__(self):
         return f"{self.pk}: {self.identifier}"
 
+class malware(models.Model):
 
-class technique(models.Model):
-
-    rel_tactic = models.ForeignKey(tactic, on_delete=models.CASCADE)
-    rel_mitigation = models.ManyToManyField(mitigation)
     identifier = models.CharField(max_length=64)
     name = models.CharField(max_length=128)
-    description = models.CharField(max_length=2048)
-    platform = models.CharField(max_length=128)
+    description = models.CharField(max_length=4096)
+    reference = models.CharField(max_length=2048)
+    stix = models.CharField(max_length=512)
 
     def __str__(self):
         return f"{self.pk}: {self.identifier}"
 
+class actor(models.Model):
+
+    identifier = models.CharField(max_length=64)
+    name = models.CharField(max_length=128)
+    description = models.CharField(max_length=4096)
+    reference = models.CharField(max_length=2048)
+    stix = models.CharField(max_length=512)
+
+    def __str__(self):
+        return f"{self.pk}: {self.identifier}"
+
+class tool(models.Model):
+
+    rel_actor = models.ManyToManyField(actor)
+    identifier = models.CharField(max_length=64)
+    name = models.CharField(max_length=128)
+    description = models.CharField(max_length=4096)
+    reference = models.CharField(max_length=2048)
+    stix = models.CharField(max_length=512)
+
+    def __str__(self):
+        return f"{self.pk}: {self.identifier}"
+
+class technique(models.Model):
+
+    rel_mitigation = models.ManyToManyField(mitigation)
+    rel_malware = models.ManyToManyField(malware)
+    rel_actor = models.ManyToManyField(actor)
+    rel_tactic = models.ForeignKey(TACTIC, on_delete=models.CASCADE)
+    identifier = models.CharField(max_length=64)
+    name = models.CharField(max_length=128)
+    description = models.CharField(max_length=4096)
+    platform = models.CharField(max_length=128)
+    permission = models.CharField(max_length=512)
+    commandlist = models.CharField(blank=True, max_length=4096)
+    command_ref = models.CharField(blank=True,max_length=4096)
+    dataset = models.CharField(blank=True,max_length=4096)
+    datasource = models.CharField(blank=True, max_length=4096)
+    possible_detection = models.CharField(blank=True,max_length=4096)
+
+    def __str__(self):
+        return f"{self.pk}: {self.identifier}"
+
+
 class subtechnique(models.Model):
 
     rel_technique = models.ForeignKey(technique, on_delete=models.CASCADE)
+    rel_mitigation = models.ManyToManyField(mitigation)
+    rel_malware = models.ManyToManyField(malware)
+    rel_actor = models.ManyToManyField(actor)
     identifier = models.CharField(max_length=64)
     name = models.CharField(max_length=128)
-    description = models.CharField(max_length=2048)
-    platform = models.CharField(max_length=128)
+    description = models.CharField(null=True, max_length=2048)
+    platform = models.CharField(null=True, max_length=128)
 
     def __str__(self):
         return f"{self.pk}: {self.identifier}"

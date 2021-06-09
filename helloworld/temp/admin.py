@@ -1,9 +1,12 @@
 from django.contrib import admin
-from .models import contactmodel, blog, tactic, technique, maxview, refer, mitigation, subtechnique
+from .models import contactmodel, blog, technique, maxview, refer, mitigation, subtechnique, tool, TACTIC, actor, malware
 # Register your models here.
 admin.site.register(contactmodel)
 admin.site.register(blog)
-admin.site.register(tactic)
+admin.site.register(tool)
+admin.site.register(actor)
+admin.site.register(malware)
+admin.site.register(TACTIC)
 admin.site.register(technique)
 admin.site.register(subtechnique)
 admin.site.register(mitigation)

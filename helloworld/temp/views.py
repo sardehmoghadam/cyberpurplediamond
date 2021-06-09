@@ -1,5 +1,5 @@
 from django.contrib.auth import login, logout, authenticate
-from .models import contactmodel, blog, tactic, technique
+from .models import contactmodel, blog, technique, TACTIC
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
@@ -283,11 +283,16 @@ def updatemitre(request):
         flag = True
     if request.method == "POST":
         attack = Attck()
+        TACTIC.objects.all().delete()
         for tactic in attack.enterprise.tactics:
-            q = tactics()
+            q = TACTIC()
             q.identifier = tactic.id
             q.name = tactic.name
+            q.description = tactic.description
+            q.reference = tactic.reference
+            q.stix = tactic.stix
             q.save()
+        p = TACTIC.objects.order_by('identifier')
     return render(request, "temp/updatemitre.html", {
         "flag": flag,
     })
