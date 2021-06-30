@@ -1,5 +1,5 @@
 from django.contrib.auth import login, logout, authenticate
-from .models import contactmodel, blog, technique, TACTIC
+from .models import contactmodel, blog, technique, TACTIC, malware, tool, actor
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
@@ -283,16 +283,52 @@ def updatemitre(request):
         flag = True
     if request.method == "POST":
         attack = Attck()
-        TACTIC.objects.all().delete()
-        for tactic in attack.enterprise.tactics:
-            q = TACTIC()
-            q.identifier = tactic.id
-            q.name = tactic.name
-            q.description = tactic.description
-            q.reference = tactic.reference
-            q.stix = tactic.stix
+        # TACTIC.objects.all().delete()
+        # for tactic in attack.enterprise.tactics:
+        #     q = TACTIC()
+        #     q.identifier = tactic.id
+        #     q.name = tactic.name
+        #     q.description = tactic.description
+        #     q.reference = tactic.reference
+        #     q.stix = tactic.stix
+        #     q.save()
+        # p = TACTIC.objects.order_by('identifier')
+        technique.objects.all().delete()
+        for item in attack.enterprise.techniques:
+            q = technique()
+            q.identifier = item.id
+            q.name = item.name
+            q.description = item.description
+            q.reference = item.reference
+            q.stix = item.stix
+            q.platform = item.platforms
+            q.permission = item.permissions
+            q.rel_tactic = TACTIC.objects.get(identifier='TA0009')
             q.save()
-        p = TACTIC.objects.order_by('identifier')
+        # for item in attack.enterprise.malwares:
+        #     m = malware()
+        #     m.identifier = item.id
+        #     m.name = item.name
+        #     m.description = item.description
+        #     m.reference = item.reference
+        #     m.stix = item.stix
+        #     m.save()
+        # for item in attack.enterprise.actors:
+        #     a = actor()
+        #     a.identifier = item.id
+        #     a.name = item.name
+        #     a.description = item.description
+        #     a.reference = item.reference
+        #     a.stix = item.stix
+        #     a.save()
     return render(request, "temp/updatemitre.html", {
+        "flag": flag,
+    })
+
+def subscription(request):
+    flag = False
+    if not request.user.is_authenticated:
+        flag = True
+    return render(request, "temp/subscription.html",{
         "flag": flag,
     })

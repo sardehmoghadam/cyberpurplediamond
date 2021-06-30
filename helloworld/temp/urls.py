@@ -18,4 +18,5 @@ urlpatterns = [
     path('activate/<uidb64>/<token>/', views.activate, name="activate"),
     path("<int:pk>/", views.post_detail, name="post_detail"),
     path("updatemitre", views.updatemitre, name="updatemitre"),
+    path("subscription", views.subscription, name="subscription"),
 ]

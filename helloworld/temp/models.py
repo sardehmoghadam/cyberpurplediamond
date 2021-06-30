@@ -68,7 +68,7 @@ class malware(models.Model):
 
     identifier = models.CharField(max_length=64)
     name = models.CharField(max_length=128)
-    description = models.CharField(max_length=4096)
+    description = models.CharField(max_length=4096, blank=True, null=True)
     reference = models.CharField(max_length=2048)
     stix = models.CharField(max_length=512)
 
@@ -79,7 +79,7 @@ class actor(models.Model):
 
     identifier = models.CharField(max_length=64)
     name = models.CharField(max_length=128)
-    description = models.CharField(max_length=4096)
+    description = models.CharField(max_length=4096, blank=True, null=True)
     reference = models.CharField(max_length=2048)
     stix = models.CharField(max_length=512)
 
@@ -108,10 +108,10 @@ class technique(models.Model):
     name = models.CharField(max_length=128)
     description = models.CharField(max_length=4096)
     platform = models.CharField(max_length=128)
-    permission = models.CharField(max_length=512)
+    permission = models.CharField(max_length=512, null=True)
     commandlist = models.CharField(blank=True, max_length=4096)
-    command_ref = models.CharField(blank=True,max_length=4096)
-    dataset = models.CharField(blank=True,max_length=4096)
+    command_ref = models.CharField(blank=True, max_length=4096)
+    dataset = models.CharField(blank=True, max_length=4096)
     datasource = models.CharField(blank=True, max_length=4096)
     possible_detection = models.CharField(blank=True,max_length=4096)
 
