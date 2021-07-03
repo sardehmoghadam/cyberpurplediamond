@@ -764,8 +764,10 @@ p a {
 
 .columns {
   float: left;
-  width: 25%;
+  width: 900px;
   padding: 8px;
+  margin-top: 20px;
+  margin-bottom: 50px;
 }
 
 /* Style the list */
@@ -785,13 +787,13 @@ p a {
 
 /* Pricing header */
 .price .header {
-  background-color: #111;
+  background-color: purple;
   color: white;
-  font-size: 25px;
+  font-size: 20px;
 }
 
 /* List items */
-.price li {
+.price td {
   border-bottom: 1px solid #eee;
   padding: 20px;
   text-align: center;
@@ -800,18 +802,18 @@ p a {
 /* Grey list item */
 .price .grey {
   background-color: #eee;
-  font-size: 20px;
+  font-size: 15px;
 }
 
 /* The "Sign Up" button */
 .button {
-  background-color: #04AA6D;
+  background-color: purple;
   border: none;
   color: white;
-  padding: 10px 25px;
+  padding: 10px 15px;
   text-align: center;
   text-decoration: none;
-  font-size: 18px;
+  font-size: 15px;
 }
 
 /* Change the width of the three columns to 100%
@@ -820,4 +822,9 @@ p a {
   .columns {
     width: 100%;
   }
+}
+
+
+.checkmark {
+    width: 25px;
 }

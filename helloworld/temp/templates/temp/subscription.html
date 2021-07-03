@@ -3,48 +3,116 @@
 {% block body %}
   <div class="header">
     <div class="columns">
-      <ul class="price">
-        <li class="header">Free</li>
-        <li class="grey">$ Free </li>
-        <li>10GB Storage</li>
-        <li>10 Emails</li>
-        <li>10 Domains</li>
-        <li>1GB Bandwidth</li>
-        <li class="grey"><a href="#" class="button">Sign Up</a></li>
-      </ul>
+      <table style="width:100%">
+        <tr class="price">
+          <th class="header">Choose your role</th>
+          <th class="header">Explorer</th>
+          <th class="header">Blue Diamond</td>
+          <th class="header">Red Diamond</td>
+          <th class="header">Royal Diamond</td>
+        </tr>
+        <tr class="price">
+          <td class="grey">Possibility of executing techniques</td>
+          <td><img src="{% static 'temp/images/uncheckmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+<!--          <td class="grey"><a href="#" class="button">Sign Up</a></td>-->
+        </tr>
+        <tr class="price">
+          <td class="grey">Search for possible detection</td>
+          <td><img src="{% static 'temp/images/uncheckmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+      </tr>
+      <tr class="price">
+          <td class="grey">show the commands</td>
+          <td><img src="{% static 'temp/images/uncheckmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+      </tr>
+      <tr class="price">
+          <td class="grey">recieve certificate for identication of attack </td>
+          <td><img src="{% static 'temp/images/uncheckmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+      </tr>
+      <tr class="price">
+          <tr class="price">
+          <td class="grey">Sell the detection rules</td>
+          <td><img src="{% static 'temp/images/uncheckmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+      </tr>
+      <tr class="price">
+          <td class="grey">Accessibility of AI scenarios</td>
+          <td><img src="{% static 'temp/images/uncheckmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+      </tr>
+      <tr class="price">
+          <td class="grey">Accessibility of uploaded payloads</td>
+          <td><img src="{% static 'temp/images/uncheckmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+      </tr>
+      <tr class="price">
+          <td class="grey">Sell your payload</td>
+          <td><img src="{% static 'temp/images/uncheckmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+      </tr>
+      <tr class="price">
+          <td class="grey">Performing threat hunting based on documents</td>
+          <td><img src="{% static 'temp/images/uncheckmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+          <td><img src="{% static 'temp/images/checkmark.jpg' %}" class="checkmark"></td>
+      </tr>
+      <tr class="price">
+          <td class="grey">Price</td>
+          <td class="grey"><a>0$</a></td>
+          <td class="grey"><a>10$</a></td>
+          <td class="grey"><a>10$</a></td>
+          <td class="grey"><a>15$</a></td>
+      </tr>
+      <tr class="price">
+          <td class="grey"></td>
+          <td class="grey"><a href="#" class="button">Explore</a></td>
+          <td class="grey"><a href="#" class="button">Sign Up</a></td>
+          <td class="grey"><a href="#" class="button">Sign Up</a></td>
+          <td class="grey"><a href="#" class="button">Sign Up</a></td>
+      </tr>
+      </table>
     </div>
-    <div class="columns">
-      <ul class="price">
-        <li class="header">Blue Diamond</li>
-        <li class="grey">$ 9.99 / year</li>
-        <li>10GB Storage</li>
-        <li>10 Emails</li>
-        <li>10 Domains</li>
-        <li>1GB Bandwidth</li>
-        <li class="grey"><a href="#" class="button">Sign Up</a></li>
-      </ul>
-    </div>
-    <div class="columns">
-      <ul class="price">
-        <li class="header">Red Diamond</li>
-        <li class="grey">$ 9.99 / year</li>
-        <li>10GB Storage</li>
-        <li>10 Emails</li>
-        <li>10 Domains</li>
-        <li>1GB Bandwidth</li>
-        <li class="grey"><a href="#" class="button">Sign Up</a></li>
-      </ul>
-    </div>
-    <div class="columns">
-      <ul class="price">
-        <li class="header">Royal Diamond</li>
-        <li class="grey">$ 14.99 / year</li>
-        <li>10GB Storage</li>
-        <li>10 Emails</li>
-        <li>10 Domains</li>
-        <li>1GB Bandwidth</li>
-        <li class="grey"><a href="#" class="button">Sign Up</a></li>
-      </ul>
-    </div>
+<!--    <div class="columns">-->
+<!--      <ul class="price">-->
+<!--        <li class="header">Red Diamond</li>-->
+<!--        <li class="grey">$ 9.99 / year</li>-->
+<!--        <li>10GB Storage</li>-->
+<!--        <li>10 Emails</li>-->
+<!--        <li>10 Domains</li>-->
+<!--        <li>1GB Bandwidth</li>-->
+<!--        <li class="grey"><a href="#" class="button">Sign Up</a></li>-->
+<!--      </ul>-->
+<!--    </div>-->
+<!--    <div class="columns">-->
+<!--      <ul class="price">-->
+<!--        <li class="header">Royal Diamond</li>-->
+<!--        <li class="grey">$ 14.99 / year</li>-->
+<!--        <li>10GB Storage</li>-->
+<!--        <li>10 Emails</li>-->
+<!--        <li>10 Domains</li>-->
+<!--        <li>1GB Bandwidth</li>-->
+<!--        <li class="grey"><a href="#" class="button">Sign Up</a></li>-->
+<!--      </ul>-->
+<!--    </div>-->
   </div>
 {% endblock %}
