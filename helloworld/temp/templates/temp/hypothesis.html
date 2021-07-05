@@ -1,0 +1,87 @@
+{% extends "temp/layout.html" %}
+{% load static %}
+{% block body %}
+                     <div id="contents">
+                        <button type="button" class="collapsible">Ask a question</button>
+							<div class="mycascade">
+								<button type="button" class="collapsible">Tactics</button>
+									<div class="mycascade">
+
+									</div>
+
+							</div>
+						 <button type="button" class="collapsible">Perform background search</button>
+							<div class="mycascade">
+								<button type="button" class="collapsible">Tactics</button>
+									<div class="mycascade">
+
+									</div>
+
+							</div>
+						 <button type="button" class="collapsible">Construct hypothesis</button>
+							<div class="mycascade">
+								<button type="button" class="collapsible">Tactics</button>
+									<div class="mycascade">
+
+									</div>
+
+							</div>
+						 <button type="button" class="collapsible">Test the hypothesis through experiments</button>
+							<div class="mycascade">
+								<button type="button" class="collapsible">Tactics</button>
+									<div class="mycascade">
+
+									</div>
+
+							</div>
+						 <button type="button" class="collapsible">Analyze the results of the experiments and conclude</button>
+							<div class="mycascade">
+								<button type="button" class="collapsible">Tactics</button>
+									<div class="mycascade">
+
+									</div>
+
+							</div>
+						 <button type="button" class="collapsible">Report the results</button>
+							<div class="mycascade">
+								<button type="button" class="collapsible">Tactics</button>
+									<div class="mycascade">
+
+									</div>
+
+							</div>
+					 </div>
+
+			<script>
+
+				var coll = document.getElementsByClassName("collapsible");
+				var i;
+
+				for (i = 0; i < coll.length; i++) {
+				  coll[i].addEventListener("click", function() {
+					this.classList.toggle("active");
+					var content = this.nextElementSibling;
+					if (content.style.display === "block") {
+					  content.style.display = "none";
+					} else {
+					  content.style.display = "block";
+					}
+				  });
+				}
+				function expand() {
+				var coll = document.getElementsByClassName("collapsible");
+				var i;
+
+				for (i = 0; i < coll.length; i++) {
+				  	coll[i].classList.toggle("active");
+					var content = coll[i].nextElementSibling;
+					if (content.style.display === "block") {
+					  content.style.display = "none";
+					} else {
+					  content.style.display = "block";
+					}
+				  ;
+				}
+				}
+			</script>
+{% endblock %}

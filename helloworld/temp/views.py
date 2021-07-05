@@ -329,6 +329,30 @@ def subscription(request):
     flag = False
     if not request.user.is_authenticated:
         flag = True
-    return render(request, "temp/subscription.html",{
+    return render(request, "temp/subscription.html", {
+        "flag": flag,
+    })
+
+def hypothesis(request):
+    flag = False
+    if not request.user.is_authenticated:
+        flag = True
+    return render(request, "temp/hypothesis.html", {
+        "flag": flag,
+    })
+
+def ai(request):
+    flag = False
+    if not request.user.is_authenticated:
+        flag = True
+    return render(request, "temp/ai.html", {
+        "flag": flag,
+    })
+
+def emulate(request):
+    flag = False
+    if not request.user.is_authenticated:
+        flag = True
+    return render(request, "temp/emulate.html", {
         "flag": flag,
     })

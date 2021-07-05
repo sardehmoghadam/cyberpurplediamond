@@ -19,4 +19,7 @@ urlpatterns = [
     path("<int:pk>/", views.post_detail, name="post_detail"),
     path("updatemitre", views.updatemitre, name="updatemitre"),
     path("subscription", views.subscription, name="subscription"),
+    path("hypothesis", views.hypothesis, name="hypothesis"),
+    path("ai", views.ai, name="ai"),
+    path("emulate", views.emulate, name="emulate"),
 ]
