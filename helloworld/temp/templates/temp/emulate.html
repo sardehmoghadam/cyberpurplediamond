@@ -1,21 +1,28 @@
 {% extends "temp/layout.html" %}
 {% load static %}
 {% block body %}
-<div class="content">
-     <form name="form1" id="form1" action="/action_page.php">
-      Subjects: <select name="subject" id="subject">
-        <option value="" selected="selected">Select subject</option>
-      </select>
+<div class="contents">
 
-      Topics: <select name="topic" id="topic">
-        <option value="" selected="selected">Please select subject first</option>
-      </select>
+       <form name="form1" id="form1" action="/action_page.php" class="form1">
+          <select name="tactic" id="tactic">
+            <option value="" selected="selected">Choose a Tactics</option>
+          </select>
 
-      Chapters: <select name="chapter" id="chapter">
-        <option value="" selected="selected">Please select topic first</option>
-      </select>
+          <select name="technique" id="technique">
+            <option value="" selected="selected">Choose a technique</option>
+          </select>
 
-      <input type="submit" value="Submit">
-    </form>
+          <select name="platform" id="platform">
+            <option value="" selected="selected">Choose a platform</option>
+          </select>
+
+          <input type="submit" value="Run">
+       </form>
+    <div class="results">
+        <p>
+			 results
+		</p>
+    </div>
+
 </div>
 {% endblock %}

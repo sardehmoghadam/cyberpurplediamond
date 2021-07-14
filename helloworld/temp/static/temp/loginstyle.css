@@ -828,3 +828,29 @@ p a {
 .checkmark {
     width: 25px;
 }
+
+<----------------------dropdown----------------------------->
+.form1 {
+    margin-left: 100px;
+}
+
+.form1 select {
+    width: 400px;
+    margin-top: 50px ;
+    font-size: 20px;
+    font-style: inherit;
+}
+.form1 input {
+    margin-top: 50px ;
+    font-size: 20px;
+    font-style: inherit;
+}
+
+.results {
+    text-align: left;
+    text-indent: 50px;
+    background-color: #8a8a8a;
+    width: 1000px;
+    margin-top:50px;
+    margin-left:500px;
+}
