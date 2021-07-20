@@ -147,3 +147,13 @@ class refer(models.Model):
 
     def __str__(self):
         return f"referID: {self.referid}"
+
+
+class emulation(models.Model):
+
+    ability = models.CharField(max_length=65535)
+    command = models.CharField(max_length=65535)
+    possibledetection = models.CharField(max_length=65535)
+
+    def __str__(self):
+        return f"Ability: {self.ability}"

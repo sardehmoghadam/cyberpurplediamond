@@ -1,5 +1,5 @@
 from django.contrib.auth import login, logout, authenticate
-from .models import contactmodel, blog, technique, TACTIC, malware, tool, actor
+from .models import contactmodel, blog, technique, TACTIC, malware, tool, actor, emulation
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
@@ -283,28 +283,25 @@ def updatemitre(request):
         flag = True
     if request.method == "POST":
         attack = Attck()
-        # TACTIC.objects.all().delete()
-        # for tactic in attack.enterprise.tactics:
-        #     q = TACTIC()
-        #     q.identifier = tactic.id
-        #     q.name = tactic.name
-        #     q.description = tactic.description
-        #     q.reference = tactic.reference
-        #     q.stix = tactic.stix
-        #     q.save()
+        emulation.objects.all().delete()
+        for tactic in attack.enterprise.tactics:
+            for technique in tactic.techniques:
+                q = emulation()
+                q.ability = "(" + tactic.id + " " + tactic.name + ")" + " " + technique.id + " " + technique.name
+                q.save()
         # p = TACTIC.objects.order_by('identifier')
-        technique.objects.all().delete()
-        for item in attack.enterprise.techniques:
-            q = technique()
-            q.identifier = item.id
-            q.name = item.name
-            q.description = item.description
-            q.reference = item.reference
-            q.stix = item.stix
-            q.platform = item.platforms
-            q.permission = item.permissions
-            q.rel_tactic = TACTIC.objects.get(identifier='TA0009')
-            q.save()
+        # technique.objects.all().delete()
+        # for item in attack.enterprise.techniques:
+        #     q = technique()
+        #     q.identifier = item.id
+        #     q.name = item.name
+        #     q.description = item.description
+        #     q.reference = item.reference
+        #     q.stix = item.stix
+        #     q.platform = item.platforms
+        #     q.permission = item.permissions
+        #     q.rel_tactic = TACTIC.objects.get(identifier='TA0009')
+        #     q.save()
         # for item in attack.enterprise.malwares:
         #     m = malware()
         #     m.identifier = item.id

