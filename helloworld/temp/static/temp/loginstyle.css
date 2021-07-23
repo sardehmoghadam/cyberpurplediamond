@@ -829,6 +829,14 @@ p a {
     width: 25px;
 }
 
+<----------------------Emulation----------------------------->
+
+<----------------------Status----------------------------->
+.agentstatus {
+    text-align: center;
+
+    margin-top: 100px;
+}
 <----------------------dropdown----------------------------->
 .form1 {
     margin-left: 100px;
@@ -841,6 +849,12 @@ p a {
     font-style: inherit;
 }
 .form1 input {
+    margin-top: 50px ;
+    font-size: 20px;
+    font-style: inherit;
+}
+
+.form1 h1 {
     margin-top: 50px ;
     font-size: 20px;
     font-style: inherit;
