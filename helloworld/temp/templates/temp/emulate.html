@@ -13,11 +13,13 @@
        <form name="form0" id="form0" action="" class="form1" method="POST">
            {% csrf_token %}
            {% if serverstatus == False %}
-               <h1>Run the server</h1>
-               <input name="form0" type="submit" value="Run">
+               <h1>{{ message }}</h1>
+               <input name="run" type="submit" value="RUN">
+
            {% endif %}
            {% if serverstatus %}
-               <h1>Server is Running</h1>
+               <h1>{{ message }}</h1>
+               <input name="stop" type="submit" value="Stop">
            {% endif %}
        </form>
 
@@ -37,12 +39,12 @@
        </form>
        <form name="form2" id="form2" action="" class="form1" method="POST">
           {% csrf_token %}
-          <input value="Enter command..." type="text" name="commnad">
-          <input name="form2" type="submit" value="Run">
+          <input value="Enter command..." type="text" name="command">
+          <input name="mannualcommand" type="submit" value="Run">
        </form>
     <div class="results">
         <p>
-			 results
+			 {{ result }}
 		</p>
     </div>
 

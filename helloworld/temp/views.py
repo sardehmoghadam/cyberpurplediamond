@@ -350,6 +350,9 @@ def ai(request):
 def emulate(request):
     flag = False
     serverstatus = False
+    message = "Click on \"RUN\" button to run the server and then run the agent"
+    global client_socket, client_address, result
+    result = ""
     if request.method == "POST" and "form1" in request.POST:
         status = True
     if request.method == "POST" and "form2" in request.POST:
@@ -363,26 +366,46 @@ def emulate(request):
     # bind the socket to all IP addresses of this host
 
     s = socket.socket()
-    if request.method == "POST" and "form0" in request.POST:
+    if request.method == "POST" and "run" in request.POST:
         try:
             s.bind((SERVER_HOST, SERVER_PORT))
             s.listen(5)
-            print(f"Listening as {SERVER_HOST}:{SERVER_PORT} ...")
+            # message = f"Listening as {SERVER_HOST}:{SERVER_PORT} ..."
+            # global client_socket, client_address
             client_socket, client_address = s.accept()
-            print(f"{client_address[0]}:{client_address[1]} Connected!")
+            # message = f"{client_address[0]}:{client_address[1]} Connected!"
             # just sending a message, for demonstration purposes
             message = "Hello and Welcome".encode()
             client_socket.send(message)
+        except OSError:
+            message = "Server is running right now".encode()
+        serverstatus = True
+        message = f"Listening as {SERVER_HOST}:{SERVER_PORT} ..."
+    if request.method == "POST" and "stop" in request.POST:
+        try:
             # close connection to the client
             client_socket.close()
             # close server connection
             s.close()
         except OSError:
-            message = "Server is running right now".encode()
+            message = "Failed to close the connection".encode()
             serverstatus = True
+        serverstatus = False
+        message = "Client and server disconnected".encode()
+    if request.method == "POST" and "mannualcommand" in request.POST:
+        command = request.POST["command"]
+        try:
+            client_socket.send(command.encode())
+            # retrieve command results
+            result = client_socket.recv(BUFFER_SIZE).decode()
+        except OSError:
+            message = "Failed to execute the command".encode()
+
     if not request.user.is_authenticated:
         flag = True
     return render(request, "temp/emulate.html", {
         "flag": flag,
         "serverstatus": serverstatus,
+        "message": message,
+        "result": result,
     })

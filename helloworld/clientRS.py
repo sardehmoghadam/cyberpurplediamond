@@ -1,7 +1,7 @@
 import socket, datetime, threading
 import subprocess
 
-SERVER_HOST = "192.168.206.128"
+SERVER_HOST = "localhost"
 SERVER_PORT = 1991
 BUFFER_SIZE = 1024
 
