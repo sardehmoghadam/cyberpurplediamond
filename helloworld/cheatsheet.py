@@ -9,3 +9,8 @@
 
 {# define attribute in template #}
 {% with i=1 %}
+
+def my_function(fname):
+  print(fname + " Refsnes")
+
+my_function("Emil")

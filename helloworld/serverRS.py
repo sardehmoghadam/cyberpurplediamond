@@ -1,5 +1,5 @@
 import socket
-SERVER_HOST = "192.168.95.130"
+SERVER_HOST = "192.168.206.128"
 SERVER_PORT = 1991
 # send 1024 (1kb) a time (as buffer size)
 BUFFER_SIZE = 1024
