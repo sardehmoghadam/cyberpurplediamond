@@ -839,11 +839,11 @@ p a {
 }
 <----------------------dropdown----------------------------->
 .form1 {
-    margin-left: 100px;
+
 }
 
 .form1 select {
-    width: 400px;
+    width: 300px;
     margin-top: 50px ;
     font-size: 20px;
     font-style: inherit;
@@ -860,11 +860,34 @@ p a {
     font-style: inherit;
 }
 
+.form0 {
+    text-align: center;
+
+}
+
+.form0 input {
+    font-style:inherit;
+    font-size: 50px;
+
+}
+
+.form2 input {
+    font-style:inherit;
+    font-size: 20px;
+
+}
+
+#manualcommand {
+    width: 900px;
+    font-size:20px;
+    font-style:inherit;
+    margin-top:30px;
+
+}
+
 .results {
     text-align: left;
-    text-indent: 50px;
     background-color: #8a8a8a;
-    width: 1000px;
+    width: 900px;
     margin-top:50px;
-    margin-left:500px;
 }

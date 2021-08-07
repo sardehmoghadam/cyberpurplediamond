@@ -149,3 +149,8 @@ var openMenu1 = function(pageName, elmnt, color) {
         });
       });
     }(jQuery));
+
+var waitingclient = function() {
+r
+    document.getElementById('waitingclient').style.display = "block";
+}

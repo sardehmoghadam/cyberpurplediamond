@@ -2,7 +2,7 @@
 {% load static %}
 {% block body %}
 
-<div class="contents">
+<div id="contents">
 
     {% if status %}
         <h1>Agent is connected</h1>
@@ -10,11 +10,12 @@
     {% if status == False %}
         <h1>Agent is disconnected</h1>
     {% endif %}
-       <form name="form0" id="form0" action="" class="form1" method="POST">
+       <form name="form0" id="form0" action="" class="form0" method="POST">
            {% csrf_token %}
            {% if serverstatus == False %}
                <h1>{{ message }}</h1>
-               <input name="run" type="submit" value="RUN">
+               <input name="run" type="submit" value="Start" onclick="waitingclient()">
+               <h1 id="waitingclient" style="display: none">Waiting for client to connect...</h1>
 
            {% endif %}
            {% if serverstatus %}
@@ -27,24 +28,30 @@
             {% csrf_token %}
           <select name="tactic" id="tactic">
             <option value="" selected="selected">Choose a Tactics</option>
+            <option value="">Discovery</option>
           </select>
           <select name="technique" id="technique">
             <option value="" selected="selected">Choose a technique</option>
+            <option value="">System network configuration discovery</option>
           </select>
 
           <select name="platform" id="platform">
             <option value="" selected="selected">Choose a platform</option>
+            <option value="">Windows</option>
           </select>
           <input name="form1" type="submit" value="Run">
        </form>
-       <form name="form2" id="form2" action="" class="form1" method="POST">
+       <form name="form2" id="form2" action="" class="form2" method="POST">
           {% csrf_token %}
-          <input value="Enter command..." type="text" name="command">
+          <input id="manualcommand" value="Enter command..." type="text" name="command">
           <input name="mannualcommand" type="submit" value="Run">
        </form>
     <div class="results">
         <p>
 			 {{ result }}
+		</p>
+        <p>
+            {{ possibledetection }}
 		</p>
     </div>
 

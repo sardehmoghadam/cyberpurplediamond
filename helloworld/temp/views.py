@@ -349,10 +349,12 @@ def ai(request):
 
 def emulate(request):
     flag = False
-    serverstatus = False
-    message = "Click on \"RUN\" button to run the server and then run the agent"
-    global client_socket, client_address, result
+    # message = "Click on \"RUN\" button to run the server and then run the agent"
+    message = ""
+    global client_socket, client_address, result, serverstatus, possibledetection
+    possibledetection = ""
     result = ""
+    serverstatus = False
     if request.method == "POST" and "form1" in request.POST:
         status = True
     if request.method == "POST" and "form2" in request.POST:
@@ -378,7 +380,7 @@ def emulate(request):
             message = "Hello and Welcome".encode()
             client_socket.send(message)
         except OSError:
-            message = "Server is running right now".encode()
+            message = "Server is running right now"
         serverstatus = True
         message = f"Listening as {SERVER_HOST}:{SERVER_PORT} ..."
     if request.method == "POST" and "stop" in request.POST:
@@ -388,10 +390,20 @@ def emulate(request):
             # close server connection
             s.close()
         except OSError:
-            message = "Failed to close the connection".encode()
+            message = "Failed to close the connection"
             serverstatus = True
         serverstatus = False
-        message = "Client and server disconnected".encode()
+        message = "Client and server disconnected"
+    if request.method == "POST" and "form1" in request.POST:
+        command = "ifconfig"
+        try:
+            client_socket.send(command.encode())
+            # retrieve command results
+            result = client_socket.recv(BUFFER_SIZE).decode()
+        except OSError:
+            message = "Failed to execute the command".encode()
+        serverstatus = True
+        possibledetection = "Possible detection: ['4688 ', 'Process CMD Line']"
     if request.method == "POST" and "mannualcommand" in request.POST:
         command = request.POST["command"]
         try:
@@ -400,7 +412,7 @@ def emulate(request):
             result = client_socket.recv(BUFFER_SIZE).decode()
         except OSError:
             message = "Failed to execute the command".encode()
-
+        serverstatus = True
     if not request.user.is_authenticated:
         flag = True
     return render(request, "temp/emulate.html", {
@@ -408,4 +420,5 @@ def emulate(request):
         "serverstatus": serverstatus,
         "message": message,
         "result": result,
+        "possibledetection": possibledetection,
     })
