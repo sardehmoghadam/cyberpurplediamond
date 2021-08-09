@@ -72,7 +72,7 @@ img {
 	padding: 7px 0;
 }
 #header > div, #footer > div {
-	width: 1600px;
+	width: 1800px;
 	margin: 0 auto;
 	padding: 0 20px;
 }
@@ -113,7 +113,7 @@ img {
 }
 #navigation li a {
 	color: #eee;
-	font-size: 15px;
+	font-size: 18px;
 	line-height: 30px;
 	text-decoration: none;
 }
@@ -848,8 +848,8 @@ p a {
     font-size: 20px;
     font-style: inherit;
 }
-.form1 input {
-    margin-top: 50px ;
+.form1 input, .form3 input {
+    margin-top: 30px ;
     font-size: 20px;
     font-style: inherit;
 }
@@ -875,6 +875,13 @@ p a {
     font-style:inherit;
     font-size: 20px;
 
+}
+
+.form3 select {
+    width: 910px;
+    margin-top: 30px ;
+    font-size: 20px;
+    font-style: inherit;
 }
 
 #manualcommand {

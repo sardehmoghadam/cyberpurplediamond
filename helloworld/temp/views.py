@@ -353,7 +353,7 @@ def emulate(request):
     message = ""
     global client_socket, client_address, result, serverstatus, possibledetection
     possibledetection = ""
-    result = ""
+    result = []
     serverstatus = False
     if request.method == "POST" and "form1" in request.POST:
         status = True
@@ -362,7 +362,7 @@ def emulate(request):
     SERVER_HOST = "localhost"
     SERVER_PORT = 1991
     # send 1024 (1kb) a time (as buffer size)
-    BUFFER_SIZE = 1024
+    BUFFER_SIZE = 4096
     # create a socket object
 
     # bind the socket to all IP addresses of this host
@@ -394,14 +394,25 @@ def emulate(request):
             serverstatus = True
         serverstatus = False
         message = "Client and server disconnected"
+    if request.method == "POST" and "form3" in request.POST:
+        command = ["ifconfig", "ls"]
+        for item in command:
+            try:
+                client_socket.send(item.encode())
+                # retrieve command results
+                result.append(client_socket.recv(BUFFER_SIZE).decode())
+            except OSError:
+                message = "Failed to execute the command".encode()
+        serverstatus = True
     if request.method == "POST" and "form1" in request.POST:
-        command = "ifconfig"
-        try:
-            client_socket.send(command.encode())
-            # retrieve command results
-            result = client_socket.recv(BUFFER_SIZE).decode()
-        except OSError:
-            message = "Failed to execute the command".encode()
+        command = ["ifconfig"]
+        for item in command:
+            try:
+                client_socket.send(item.encode())
+                # retrieve command results
+                result.append(client_socket.recv(BUFFER_SIZE).decode())
+            except OSError:
+                message = "Failed to execute the command".encode()
         serverstatus = True
         possibledetection = "Possible detection: ['4688 ', 'Process CMD Line']"
     if request.method == "POST" and "mannualcommand" in request.POST:
@@ -409,7 +420,7 @@ def emulate(request):
         try:
             client_socket.send(command.encode())
             # retrieve command results
-            result = client_socket.recv(BUFFER_SIZE).decode()
+            result.append(client_socket.recv(BUFFER_SIZE).decode())
         except OSError:
             message = "Failed to execute the command".encode()
         serverstatus = True

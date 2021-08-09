@@ -41,15 +41,26 @@
           </select>
           <input name="form1" type="submit" value="Run">
        </form>
+    <form name="form3" id="form3" action="" class="form3" method="POST">
+            {% csrf_token %}
+          <select name="adversary" id="adversary">
+            <option value="" selected="selected">Choose an adversary</option>
+            <option value="">REvil</option>
+          </select>
+          <input name="form3" type="submit" value="Run">
+       </form>
        <form name="form2" id="form2" action="" class="form2" method="POST">
           {% csrf_token %}
           <input id="manualcommand" value="Enter command..." type="text" name="command">
           <input name="mannualcommand" type="submit" value="Run">
        </form>
     <div class="results">
-        <p>
-			 {{ result }}
-		</p>
+        {% for item in result %}
+            <p>
+			{{ item }}
+		    </p>
+            <a>----------------------------------------------------------------------------------------------------------------------------------------------------------------------</a>
+        {% endfor %}
         <p>
             {{ possibledetection }}
 		</p>
