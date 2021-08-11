@@ -151,9 +151,11 @@ class refer(models.Model):
 
 class emulation(models.Model):
 
-    ability = models.CharField(max_length=65535)
+    tactic = models.CharField(max_length=65535)
+    technique = models.CharField(max_length=65535)
+    action = models.CharField(max_length=65535)
     command = models.CharField(max_length=65535)
     possibledetection = models.CharField(max_length=65535)
 
     def __str__(self):
-        return f"Ability: {self.ability}"
+        return f"Technique: {self.technique}, Action: {self.action}"

@@ -28,16 +28,13 @@
             {% csrf_token %}
           <select name="tactic" id="tactic">
             <option value="" selected="selected">Choose a Tactics</option>
-            <option value="">Discovery</option>
           </select>
           <select name="technique" id="technique">
             <option value="" selected="selected">Choose a technique</option>
-            <option value="">System network configuration discovery</option>
           </select>
 
-          <select name="platform" id="platform">
-            <option value="" selected="selected">Choose a platform</option>
-            <option value="">Windows</option>
+          <select name="action" id="action">
+            <option value="" selected="selected">Choose an action</option>
           </select>
           <input name="form1" type="submit" value="Run">
        </form>
@@ -55,6 +52,9 @@
           <input name="mannualcommand" type="submit" value="Run">
        </form>
     <div class="results">
+        <p>
+            {{ command }}
+        </p>
         {% for item in result %}
             <p>
 			{{ item }}
@@ -67,4 +67,43 @@
     </div>
 
 </div>
+<script>
+var subjectObject = {
+  "Discovery": {
+    "System owner/user discovery": ["Current user", "Identify active user", "Gat admin members", "Get service accounts", "System owner/user discovery"],
+    "CSS": ["Borders", "Margins", "Backgrounds", "Float"],
+    "JavaScript": ["Variables", "Operators", "Functions", "Conditions"]
+  },
+  "Back-end": {
+    "PHP": ["Variables", "Strings", "Arrays"],
+    "SQL": ["SELECT", "UPDATE", "DELETE"]
+  }
+}
+window.onload = function() {
+  var subjectSel = document.getElementById("tactic");
+  var topicSel = document.getElementById("technique");
+  var chapterSel = document.getElementById("action");
+  for (var x in subjectObject) {
+    subjectSel.options[subjectSel.options.length] = new Option(x, x);
+  }
+  subjectSel.onchange = function() {
+    //empty Chapters- and Topics- dropdowns
+    chapterSel.length = 1;
+    topicSel.length = 1;
+    //display correct values
+    for (var y in subjectObject[this.value]) {
+      topicSel.options[topicSel.options.length] = new Option(y, y);
+    }
+  }
+  topicSel.onchange = function() {
+    //empty Chapters dropdown
+    chapterSel.length = 1;
+    //display correct values
+    var z = subjectObject[subjectSel.value][this.value];
+    for (var i = 0; i < z.length; i++) {
+      chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
+    }
+  }
+}
+</script>
 {% endblock %}

@@ -1,5 +1,5 @@
 from django.contrib.auth import login, logout, authenticate
-from .models import contactmodel, blog, technique, TACTIC, malware, tool, actor, emulation
+from .models import contactmodel, blog, technique, TACTIC, malware, actor, emulation
 from django.shortcuts import render, redirect
 from django.urls import reverse
 from django.http import HttpResponseRedirect, HttpResponse
@@ -351,8 +351,11 @@ def emulate(request):
     flag = False
     # message = "Click on \"RUN\" button to run the server and then run the agent"
     message = ""
-    global client_socket, client_address, result, serverstatus, possibledetection
+    global client_socket, client_address, result, serverstatus, possibledetection, tactic, technique, command
     possibledetection = ""
+    tactic=""
+    technique=""
+    command=""
     result = []
     serverstatus = False
     if request.method == "POST" and "form1" in request.POST:
@@ -405,14 +408,20 @@ def emulate(request):
                 message = "Failed to execute the command".encode()
         serverstatus = True
     if request.method == "POST" and "form1" in request.POST:
+        tactic = request.POST["tactic"]
+        technique = request.POST["technique"]
+        action = request.POST["action"]
+
         command = ["ifconfig"]
-        for item in command:
-            try:
-                client_socket.send(item.encode())
-                # retrieve command results
-                result.append(client_socket.recv(BUFFER_SIZE).decode())
-            except OSError:
-                message = "Failed to execute the command".encode()
+        filter = emulation.objects.get(tactic=tactic, technique=technique, action=action)
+        command = filter.command
+
+        try:
+            client_socket.send(command.encode())
+            # retrieve command results
+            result.append(client_socket.recv(BUFFER_SIZE).decode())
+        except OSError:
+            message = "Failed to execute the command".encode()
         serverstatus = True
         possibledetection = "Possible detection: ['4688 ', 'Process CMD Line']"
     if request.method == "POST" and "mannualcommand" in request.POST:
@@ -432,4 +441,7 @@ def emulate(request):
         "message": message,
         "result": result,
         "possibledetection": possibledetection,
+        "tactic": tactic,
+        "technique": technique,
+        "command": command,
     })
