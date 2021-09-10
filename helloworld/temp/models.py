@@ -1,5 +1,6 @@
 from django.db import models
 from pyattck import Attck
+from django.contrib.auth.models import User
 from django.utils import timezone
 
 attack = Attck()
@@ -8,6 +9,16 @@ from django.contrib.auth.models import PermissionsMixin
 
 
 # Create your models here.
+class useratt(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    assignedport = models.IntegerField()
+    role = models.CharField(max_length=64)
+
+    def __str__(self):
+        return f"{self.user}: {self.assignedport}: {self.role}"
+
+
 
 class contactmodel(models.Model):
 
@@ -109,7 +120,7 @@ class technique(models.Model):
     description = models.CharField(max_length=4096)
     platform = models.CharField(max_length=128)
     permission = models.CharField(max_length=512, null=True)
-    commandlist = models.CharField(blank=True, max_length=4096)
+    commandlist = models.CharField(blank=True, max_length=4096, null=True)
     command_ref = models.CharField(blank=True, max_length=4096)
     dataset = models.CharField(blank=True, max_length=4096)
     datasource = models.CharField(blank=True, max_length=4096)
@@ -159,3 +170,27 @@ class emulation(models.Model):
 
     def __str__(self):
         return f"Technique: {self.technique}, Action: {self.action}"
+
+class customadversary(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    name = models.CharField(max_length=1024)
+    list = models.CharField(max_length=65535, null=True)
+
+    def __str__(self):
+        return f"User: {self.user}, Adversary name: {self.name}"
+
+class actionsofadversary(models.Model):
+
+    adversary = models.ForeignKey(customadversary, on_delete=models.CASCADE)
+    order = models.IntegerField()
+    emulationid = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.adversary}, {self.order}"
+
+
+class lastestport(models.Model):
+
+    port = models.IntegerField()
+

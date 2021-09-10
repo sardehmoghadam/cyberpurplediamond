@@ -72,7 +72,7 @@ img {
 	padding: 7px 0;
 }
 #header > div, #footer > div {
-	width: 1800px;
+	width: auto;
 	margin: 0 auto;
 	padding: 0 20px;
 }
@@ -105,15 +105,17 @@ img {
 	list-style: none;
 	margin: 0;
 	padding: 0;
+	width: 100%;
 }
 #navigation li {
 	float: left;
-	width: 160px;
+	margin-left: 70px;
+
 	text-align: center;
 }
 #navigation li a {
 	color: #eee;
-	font-size: 18px;
+	font-size: 15px;
 	line-height: 30px;
 	text-decoration: none;
 }
@@ -897,4 +899,38 @@ p a {
     background-color: #8a8a8a;
     width: 900px;
     margin-top:50px;
+}
+
+.runadv select {
+    width: 840px;
+    margin-top: 30px ;
+    font-size: 20px;
+    font-style: inherit;
+}
+
+.runadv input {
+    font-size: 20px;
+    font-style: inherit;
+}
+
+.addaction select{
+	width: 225px;
+	font-size: 20px;
+	margin-top: 30px;
+
+}
+
+.addaction input{
+	font-size: 20px;
+
+}
+
+.adversaryresults table {
+	width: 960px;
+	margin-top: 25px;
+}
+
+.adversaryresults table, th, td {
+	border: 1px solid black;
+
 }

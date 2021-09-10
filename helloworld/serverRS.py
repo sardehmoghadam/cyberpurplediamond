@@ -10,7 +10,7 @@ s.bind((SERVER_HOST, SERVER_PORT))
 s.listen(5)
 print(f"Listening as {SERVER_HOST}:{SERVER_PORT} ...")
 client_socket, client_address = s.accept()
-print(f"{client_address[0]}:{client_address[1]} Connected!")
+print(f"{client_address[0]}:{client_address[1]} {client_socket.id}Connected!")
 
 # just sending a message, for demonstration purposes
 message = "Hello and Welcome".encode()

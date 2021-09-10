@@ -23,8 +23,13 @@
                <input name="stop" type="submit" value="Stop">
            {% endif %}
        </form>
+       <form name="form2" id="form2" action="" class="form2" method="POST">
+          {% csrf_token %}
+          <input id="manualcommand" value="" type="text" name="command" required placeholder="Enter a name for your adversary...">
+          <input name="mannualcommand" type="submit" value="Add">
+       </form>
 
-       <form name="form1" id="form1" action="" class="form1" method="POST">
+       <form name="form1" id="form1" action="" class="addaction" method="POST">
             {% csrf_token %}
           <select name="tactic" id="tactic" required>
             <option value="" selected="selected">Choose a Tactics</option>
@@ -36,20 +41,25 @@
           <select name="action" id="action" required>
             <option value="" selected="selected">Choose an action</option>
           </select>
-          <input name="form1" type="submit" value="Run">
+          <select name="selectedadversary" id="selectedadversary" required>
+               <option value="" selected="selected">Select your adversary</option>
+               {% for item in listadversary %}
+               <option value="{{ item }}">{{ item }}</option>
+               {% endfor %}
+          </select>
+          <input name="form1" type="submit" value="Add">
        </form>
-<!--    <form name="form3" id="form3" action="" class="form3" method="POST">-->
-<!--            {% csrf_token %}-->
-<!--          <select name="adversary" id="adversary" required>-->
-<!--            <option value="" selected="selected">Choose an adversary</option>-->
-<!--            <option value="">REvil</option>-->
-<!--          </select>-->
-<!--          <input name="form3" type="submit" value="Run">-->
-<!--       </form>-->
-       <form name="form2" id="form2" action="" class="form2" method="POST">
-          {% csrf_token %}
-          <input id="manualcommand" value="" type="text" name="command" required placeholder="Enter your command...">
-          <input name="mannualcommand" type="submit" value="Run">
+
+       <form name="form3" id="form3" action="" class="runadv" method="POST">
+            {% csrf_token %}
+          <select name="showadversary" id="showadversary" required>
+            <option value="" selected="selected">Select your adversary</option>
+            {% for item in listadversary %}
+              <option value="{{ item }}">{{ item }}</option>
+            {% endfor %}
+          </select>
+          <input name="form3" type="submit" value="Show">
+          <input name="runadversary" type="submit" value="Run">
        </form>
     <div class="adversaryresults">
         <table>
@@ -59,26 +69,28 @@
             <th>Command</th>
             <th>Possible Detection</th>
             <th>Result</th>
-
+        {% for item in listactions %}
             <tr>
-                {% for item in result %}
-                <td>{{ item }}</td>
+                {% for nextitem in item %}
+                <td>{{ nextitem }}</td>
                 {% endfor %}
 		    </tr>
-
+        {% endfor %}
         </table>
-<!--        <p>-->
-<!--            {{ command }}-->
-<!--        </p>-->
-<!--        {% for item in result %}-->
-<!--            <p>-->
-<!--			{{ item }}-->
-<!--		    </p>-->
-<!--            <a>&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;&#45;</a>-->
-<!--        {% endfor %}-->
-<!--        <p>-->
-<!--            {{ possibledetection }}-->
-<!--		</p>-->
+    </div>
+    <div class="results">
+        <p>
+            {{ command }}
+        </p>
+        {% for item in result %}
+            <p>
+			{{ item }}
+		    </p>
+            <a>----------------------------------------------------------------------------------------------------------------------------------------------------------------------</a>
+        {% endfor %}
+        <p>
+            {{ possibledetection }}
+		</p>
     </div>
 
 </div>

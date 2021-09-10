@@ -22,4 +22,5 @@ urlpatterns = [
     path("hypothesis", views.hypothesis, name="hypothesis"),
     path("ai", views.ai, name="ai"),
     path("emulate", views.emulate, name="emulate"),
+    path("makeadversary", views.makeadversary, name="makeadversary"),
 ]

@@ -5,7 +5,7 @@
 	<meta charset="UTF-8">
 	<title>Purple Diamond</title>
 			{% if flag %}
-			<link href="{% static 'temp/style.css' %}" rel="stylesheet">
+			<link href="{% static 'temp/loginstyle.css' %}" rel="stylesheet">
 			{% endif %}
 			{% if flag == False %}
 			<link href="{% static 'temp/loginstyle.css' %}" rel="stylesheet">
@@ -53,7 +53,7 @@
 					<a href="{% url 'temp:emulate' %}">Emulation</a>
 				</li>
 				<li>
-					<a href="{% url 'temp:ai' %}">Make Adversary</a>
+					<a href="{% url 'temp:makeadversary' %}">Make Adversary</a>
 				</li>
 				<li>
 					<a href="{% url 'temp:hypothesis' %}">Hypothesis</a>
