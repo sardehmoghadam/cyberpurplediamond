@@ -356,7 +356,7 @@ def emulate(request):
     if not request.user.is_authenticated:
         flag = True
     # message = "Click on \"RUN\" button to run the server and then run the agent"
-    message = ""
+    message = "If you have the agent, click on start and run the agent. Otherwise, you can download it from "
     global client_socket, client_address, result, serverstatus, possibledetection, tactic, technique, command
     possibledetection = ""
     tactic=""
@@ -392,7 +392,7 @@ def emulate(request):
         except OSError:
             message = "Server is running right now"
         serverstatus = True
-        message = f"Listening as {SERVER_HOST}:{SERVER_PORT} ..."
+
     if request.method == "POST" and "stop" in request.POST:
         try:
             # close connection to the client

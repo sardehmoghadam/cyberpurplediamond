@@ -25,10 +25,11 @@ body {
 }
 
 img {
-    border-radius: 50%;
-	border: 0;
-    width: 250px;
-    height: auto;
+
+    margin-left: 200px;
+    margin-right: auto;
+    height: 500px;
+    width: auto;
 
 }
 #postpic {
@@ -62,6 +63,7 @@ img {
 }
 
 .homebullet {
+    text-align: center;
 
 }
 
@@ -70,6 +72,7 @@ img {
 	background-color: purple;
 	border-bottom: 1px solid #e6e6e6;
 	padding: 7px 0;
+
 }
 #header > div, #footer > div {
 	width: auto;
@@ -79,7 +82,8 @@ img {
 /** Logo **/
 #header .logo {
 	float: left;
-	margin-right: 20px;
+	margin-left: 300px;
+	margin-right: 50px;
 }
 #header .logo a {
 	background: url("images/logo.png") no-repeat center top;
@@ -105,12 +109,11 @@ img {
 	list-style: none;
 	margin: 0;
 	padding: 0;
-	width: 100%;
+
 }
 #navigation li {
 	float: left;
-	margin-left: 70px;
-
+	margin-right: 70px;
 	text-align: center;
 }
 #navigation li a {
@@ -183,6 +186,7 @@ h1 {
 	font-weight: normal;
 	line-height: 30px;
 	margin: 0 0 30px;
+	text-align: center;
 }
 h2 {
 	color: #003300;

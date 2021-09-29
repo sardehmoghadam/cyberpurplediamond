@@ -3,6 +3,7 @@
 <html>
 <head>
 	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>Purple Diamond</title>
 			{% if flag %}
 			<link href="{% static 'temp/loginstyle.css' %}" rel="stylesheet">
@@ -41,34 +42,36 @@
 				<li class="dropdown">
 					<a class="dropbtn">Explore</a>
 					    <div class="dropdown-content">
-						  <a href="{% url 'temp:feature' %}">MITRE Enterprise ATT&CK framework</a>
-						  <a href="{% url 'temp:preattck' %}">MITRE PreAttck ATT&CK framework</a>
-						  <a href="{% url 'temp:mobile' %}">MITRE Mobile ATT&CK framework</a>
+							<a href="{% url 'temp:feature' %}">MITRE Enterprise ATT&CK framework</a>
+							<a href="{% url 'temp:preattck' %}">MITRE PreAttck ATT&CK framework</a>
+							<a href="{% url 'temp:mobile' %}">MITRE Mobile ATT&CK framework</a>
+							<a href="{% url 'temp:mitrematrix' %}">MITRE Matrix</a>
 						</div>
 				</li>
-				<li>
-					<a href="{% url 'temp:mitrematrix' %}">MITRE Matrix</a>
+				<li class="dropdown">
+					<a class="dropbtn">Practice</a>
+					    <div class="dropdown-content">
+							<a href="{% url 'temp:emulate' %}">Emulation</a>
+							<a href="{% url 'temp:makeadversary' %}">Make Adversary</a>
+							<a href="{% url 'temp:hypothesis' %}">Hypothesis</a>
+							<a href="{% url 'temp:ai' %}">AI</a>
+						</div>
 				</li>
-				<li>
-					<a href="{% url 'temp:emulate' %}">Emulation</a>
 				</li>
-				<li>
-					<a href="{% url 'temp:makeadversary' %}">Make Adversary</a>
-				</li>
-				<li>
-					<a href="{% url 'temp:hypothesis' %}">Hypothesis</a>
-				</li>
-				<li>
-					<a href="{% url 'temp:ai' %}">AI</a>
-				</li>
-				<li>
-					<a href="{% url 'temp:news' %}">Resources</a>
-				</li>
+<!--				<li>-->
+<!--					<a href="{% url 'temp:news' %}">Resources</a>-->
+<!--				</li>-->
 <!--				<li>-->
 <!--					<a href="{% url 'temp:about' %}">About</a>-->
 <!--				</li>-->
 				<li>
-					<a href="{% url 'temp:contact' %}">Contact</a>
+					<a href="{% url 'temp:ai' %}">Certification</a>
+				</li>
+				<li>
+					<a href="{% url 'temp:ai' %}">Collaboration</a>
+				</li>
+				<li>
+					<a href="{% url 'temp:contact' %}">Contact us</a>
 				</li>
 				<li>
 					<a href="{% url 'temp:subscription' %}">Subscription</a>

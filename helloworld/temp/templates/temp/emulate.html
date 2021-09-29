@@ -13,9 +13,9 @@
        <form name="form0" id="form0" action="" class="form0" method="POST">
            {% csrf_token %}
            {% if serverstatus == False %}
-               <h1>{{ message }}</h1>
+               <h1>{{ message }} <a href="{% static 'temp/agent.exe' %}">this link:</a></h1>
                <input name="run" type="submit" value="Start" onclick="waitingclient()">
-               <h1 id="waitingclient" style="display: none">Waiting for client to connect...</h1>
+               <h1 id="waitingclient" style="display:none;">Waiting for client to connect...</h1>
 
            {% endif %}
            {% if serverstatus %}
@@ -119,6 +119,10 @@ window.onload = function() {
       chapterSel.options[chapterSel.options.length] = new Option(z[i], z[i]);
     }
   }
+}
+var waitingclient = function() {
+
+    document.getElementById('waitingclient').style.display = "block";
 }
 </script>
 {% endblock %}

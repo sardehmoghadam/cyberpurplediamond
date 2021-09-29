@@ -1,7 +1,7 @@
 import socket, datetime, threading
 import subprocess
 
-SERVER_PORT = input('Enter the name that is assigned to you ...')
+SERVER_PORT = input('Enter the port that is assigned to you ...')
 SERVER_HOST = "localhost"
 BUFFER_SIZE = 1024
 
