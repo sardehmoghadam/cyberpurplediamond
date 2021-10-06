@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.postgres.fields import ArrayField
 from pyattck import Attck
 from django.contrib.auth.models import User
 from django.utils import timezone
@@ -193,4 +194,26 @@ class actionsofadversary(models.Model):
 class lastestport(models.Model):
 
     port = models.IntegerField()
+
+class exam(models.Model):
+
+    qnumber = models.IntegerField()
+    question = models.CharField(max_length=2048)
+    firstchoice = models.CharField(max_length=2048)
+    secondchoice = models.CharField(max_length=2048)
+    thirdchoice = models.CharField(max_length=2048)
+    fourthchoice = models.CharField(max_length=2048)
+    correctans = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.qnumber}) {self.question} --correct answer: {self.correctans}"
+
+class userans(models.Model):
+
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    answer = models.CharField(max_length=4096)
+    lastanswer = models.IntegerField()
+
+    def __str__(self):
+        return f"{self.user}"
 

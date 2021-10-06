@@ -1,5 +1,5 @@
 from django.contrib.auth import login, logout, authenticate
-from .models import contactmodel, blog, technique, TACTIC, malware, actor, emulation, useratt, customadversary, actionsofadversary
+from .models import contactmodel, blog, technique, TACTIC, malware, actor, emulation, useratt, customadversary, actionsofadversary, userans, exam
 
 from django.shortcuts import render, redirect
 from django.urls import reverse
@@ -586,4 +586,49 @@ def makeadversary(request):
         "listadversary": listadversary,
         "listactions": listactions,
         "allemulationobjects": allemulationobjects,
+    })
+
+def certification(request):
+    flag = False; first = False; last = False
+    if not request.user.is_authenticated:
+        flag = True
+    user = request.user
+    countofquestions = exam.objects.all().count()
+    if userans.objects.filter(user_id=user.id).count() == 0:
+        userans.objects.create(user_id=user.id, answer=[], lastanswer=1)
+    else:
+        useranswer = userans.objects.get(user_id=user.id)
+    question = exam.objects.get(qnumber=useranswer.lastanswer)
+    if countofquestions == useranswer.lastanswer:
+        last = True
+    if useranswer.lastanswer == 1:
+        first = True
+    if request.method == "POST" and "NEXT" in request.POST:
+        useranswer.lastanswer = useranswer.lastanswer + 1
+        useranswer.save()
+        question = exam.objects.get(qnumber=(useranswer.lastanswer))
+        first = False
+        if countofquestions == useranswer.lastanswer:
+            last = True
+        if "choice1" in request.POST:
+            choice = 1
+        elif "choice2" in request.POST:
+            choice = 2
+        elif "choice3" in request.POST:
+            choice = 3
+        elif "choice4" in request.POST:
+            choice = 4
+        useranswer.answer.append("1")
+    if request.method == "POST" and "PREVIOUS" in request.POST:
+        useranswer.lastanswer = useranswer.lastanswer - 1
+        useranswer.save()
+        question = exam.objects.get(qnumber=(useranswer.lastanswer))
+        last = False
+        if useranswer.lastanswer == 1:
+            first = True
+    return render(request, "temp/certification.html", {
+        "flag": flag,
+        "question": question,
+        "first": first,
+        "last": last,
     })

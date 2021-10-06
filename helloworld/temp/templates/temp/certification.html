@@ -1,0 +1,27 @@
+{% extends 'temp/layout.html' %}
+{% load static %}
+{% block body %}
+    <div id="contents">
+        <form method="POST">
+            {% csrf_token %}
+            <h3 class="question">{{question.question}}</h3>
+            <input type="radio" name="choise1" class="radio" id="1">
+            <label class="radio">{{question.firstchoice}}</label><br>
+            <input type="radio" name="choise2" class="radio" id="2">
+            <label class="radio">{{question.secondchoice}}</label><br>
+            <input type="radio" name="choise3" class="radio"id="3">
+            <label class="radio">{{question.thirdchoice}}</label><br>
+            <input type="radio" name="choise4" class="radio" id="4">
+            <label class="radio">{{question.fourthchoice}}</label><br>
+            {% if first == False %}
+            <input type="submit" value="PREVIOUS" class="certbtn" name="PREVIOUS">
+            {% endif %}
+            {% if last %}
+            <input type="submit" value="FINISH" class="certbtn" name="FINISH">
+            {% else %}
+            <input type="submit" value="NEXT" class="certbtn" name="NEXT">
+            {% endif %}
+
+        </form>
+    </div>
+{% endblock %}
