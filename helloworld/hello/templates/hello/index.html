@@ -1,9 +1,0 @@
-{% extends "hello/layout.html" %}
-{% block body %}
-    <h1>Hello, This is the list of flights</h1>
-        <ul>List of flights</ul>
-        {% for flight in flights %}
-            <li>{{ flight }}</li>
-        {% endfor %}
-        <a href="{% url 'hello:add' %}">Add flight</a>
-{% endblock %}

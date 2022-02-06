@@ -1,9 +1,0 @@
-{% extends "hello/layout.html" %}
-{% block body %}
-    <form action="{% url 'hello:add' %}" method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" name="submit">
-    </form>
-    <a href="{% url 'hello:index' %}">Home page</a>
-{% endblock %}
